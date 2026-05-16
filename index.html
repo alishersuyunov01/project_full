@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kervan — Uzbekistan's Ride Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="splash-open">
+
+<!-- ============================================================
+     SPLASH SCREEN
+     ============================================================ -->
+<div id="splash">
+  <div class="splash-stars" id="splash-stars"></div>
+  <div class="splash-ring"></div>
+  <div class="splash-ring"></div>
+  <div class="splash-ring-inner" style="position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(201,168,76,0.12);background:repeating-conic-gradient(rgba(201,168,76,0.04) 0deg 10deg,transparent 10deg 20deg);"></div>
+
+  <div class="splash-center">
+    <svg class="splash-camel" viewBox="0 0 220 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="210" rx="72" ry="45" fill="#C9A84C" opacity="0.9"/>
+      <ellipse cx="130" cy="180" rx="28" ry="32" fill="#C9A84C" opacity="0.9"/>
+      <ellipse cx="90" cy="185" rx="22" ry="26" fill="#C9A84C" opacity="0.85"/>
+      <rect class="camel-head" x="155" y="150" width="22" height="55" rx="11" fill="#C9A84C" opacity="0.9"/>
+      <g class="camel-head">
+        <ellipse cx="172" cy="138" rx="20" ry="18" fill="#C9A84C" opacity="0.9"/>
+        <ellipse cx="186" cy="145" rx="12" ry="9" fill="#B8924A"/>
+        <circle cx="191" cy="147" r="2.5" fill="#8B6914"/>
+        <circle cx="174" cy="132" r="4" fill="#2D1A08"/>
+        <circle cx="175" cy="131" r="1.5" fill="white" opacity="0.7"/>
+        <ellipse cx="160" cy="124" rx="5" ry="7" fill="#C9A84C"/>
+        <ellipse cx="160" cy="124" rx="3" ry="5" fill="#8B6914"/>
+        <line x1="170" y1="127" x2="168" y2="122" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="174" y1="126" x2="173" y2="121" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="178" y1="127" x2="178" y2="122" stroke="#8B6914" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+      <path class="camel-tail" d="M38 215 Q20 235 25 255 Q28 265 35 260" stroke="#C9A84C" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="30" cy="262" rx="7" ry="6" fill="#8B6914"/>
+      <rect class="camel-leg-front-top" x="118" y="242" width="14" height="35" rx="7" fill="#B8924A"/>
+      <rect class="camel-leg-front-bot" x="118" y="272" width="14" height="32" rx="7" fill="#A07830"/>
+      <rect class="camel-leg-back-top" x="70" y="242" width="14" height="35" rx="7" fill="#B8924A"/>
+      <rect class="camel-leg-back-bot" x="70" y="272" width="14" height="32" rx="7" fill="#A07830"/>
+      <ellipse cx="108" cy="185" rx="25" ry="10" fill="#8B6914" opacity="0.8"/>
+      <rect x="90" y="178" width="36" height="12" rx="4" fill="#6B4F10" opacity="0.7"/>
+      <ellipse cx="108" cy="248" rx="55" ry="6" fill="rgba(0,0,0,0.15)"/>
+      <path d="M92 183 Q108 178 124 183" stroke="var(--gold-light)" stroke-width="1" fill="none" opacity="0.5"/>
+    </svg>
+
+    <div class="splash-title">KERVAN</div>
+    <div class="splash-subtitle">Uzbekistan's Ride Network · Since 2024</div>
+    <div class="splash-line"></div>
+
+    <div class="splash-buttons">
+      <button class="splash-btn" onclick="enterSite('passenger')">
+        <span class="splash-btn-icon">🧳</span>
+        <span class="splash-btn-label" data-en="Passenger" data-uz="Yo'lovchi" data-ru="Пассажир">Passenger</span>
+        <span class="splash-btn-sub" data-en="Book a ride" data-uz="Sayohat bron qilish" data-ru="Заказать поездку">Book a ride</span>
+      </button>
+      <button class="splash-btn" onclick="enterSite('driver')">
+        <span class="splash-btn-icon">🚗</span>
+        <span class="splash-btn-label" data-en="Driver" data-uz="Haydovchi" data-ru="Водитель">Driver</span>
+        <span class="splash-btn-sub" data-en="Join our fleet" data-uz="Flotimizga qo'shiling" data-ru="Присоединиться">Join our fleet</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     LANDING PAGE NAV
+     ============================================================ -->
+<nav id="landing-nav">
+  <a class="nav-logo" href="#">
+    <svg class="nav-logo-camel" viewBox="0 0 220 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="210" rx="72" ry="45" fill="#C9A84C" opacity="0.9"/>
+      <ellipse cx="130" cy="178" rx="28" ry="32" fill="#C9A84C" opacity="0.9"/>
+      <ellipse cx="90" cy="183" rx="22" ry="26" fill="#C9A84C" opacity="0.85"/>
+      <rect x="155" y="148" width="22" height="55" rx="11" fill="#C9A84C"/>
+      <ellipse cx="172" cy="136" rx="20" ry="18" fill="#C9A84C"/>
+      <ellipse cx="186" cy="143" rx="12" ry="9" fill="#B8924A"/>
+      <circle cx="174" cy="130" r="4" fill="#2D1A08"/>
+      <circle cx="175" cy="129" r="1.5" fill="white" opacity="0.7"/>
+      <path d="M38 215 Q20 235 25 255" stroke="#C9A84C" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <rect x="118" y="242" width="14" height="50" rx="7" fill="#B8924A"/>
+      <rect x="70" y="242" width="14" height="50" rx="7" fill="#B8924A"/>
+      <rect x="90" y="178" width="36" height="12" rx="4" fill="#6B4F10" opacity="0.7"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Kervan</span>
+      <span class="nav-logo-sub" data-en="Uzbekistan" data-uz="O'zbekiston" data-ru="Узбекистан">Uzbekistan</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#map-section" data-en="Book a Ride" data-uz="Sayohat bron" data-ru="Заказать">Book a Ride</a></li>
+    <li><a href="#routes-section" data-en="Routes" data-uz="Yo'nalishlar" data-ru="Маршруты">Routes</a></li>
+    <li><a href="#how-section" data-en="How It Works" data-uz="Qanday ishlaydi" data-ru="Как работает">How It Works</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('uz')">UZ</button>
+      <button class="lang-btn" onclick="setLang('ru')">RU</button>
+    </div>
+    <a href="#" class="nav-links nav-cta" data-en="Download App" data-uz="Ilovani yuklab olish" data-ru="Скачать">Download App</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     LANDING PAGE - HERO
+     ============================================================ -->
+<section class="hero" id="landing-hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-en="🌙 Across the Silk Road" data-uz="🌙 Ipak yo'li bo'ylab" data-ru="🌙 Вдоль Шёлкового пути">🌙 Across the Silk Road</div>
+    <h1 data-en="Move Across <em>Uzbekistan</em>" data-uz="O'zbekiston bo'ylab <em>Sayohat</em>" data-ru="Путешествуйте по <em>Узбекистану</em>">Move Across <em>Uzbekistan</em></h1>
+    <p data-en="From Tashkent to Samarkand, from Bukhara to Fergana — Kervan connects every region with reliable, comfortable, affordable rides." data-uz="Toshkentdan Samarqandgacha, Buxorodan Farġonagacha — Kervan har bir viloyatni ishonchli va qulay poezdalar bilan bog'laydi." data-ru="От Ташкента до Самарканда, от Бухары до Ферганы — Kervan соединяет каждый регион надёжными и комфортными поездками.">From Tashkent to Samarkand, from Bukhara to Fergana — Kervan connects every region with reliable, comfortable, affordable rides.</p>
+    <div class="hero-buttons">
+      <a href="#map-section" class="btn-primary" data-en="Estimate My Ride" data-uz="Narxni hisoblash" data-ru="Рассчитать цену">Estimate My Ride</a>
+      <a href="#routes-section" class="btn-secondary" data-en="Browse Routes" data-uz="Yo'nalishlarni ko'rish" data-ru="Маршруты">Browse Routes</a>
+    </div>
+  </div>
+
+  <div class="hero-camel-wrap">
+    <svg viewBox="0 0 220 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="110" cy="210" rx="72" ry="45" fill="#C9A84C" opacity="0.6"/>
+      <ellipse cx="130" cy="178" rx="28" ry="32" fill="#C9A84C" opacity="0.6"/>
+      <ellipse cx="90" cy="183" rx="22" ry="26" fill="#C9A84C" opacity="0.55"/>
+      <rect x="155" y="148" width="22" height="55" rx="11" fill="#C9A84C" opacity="0.6"/>
+      <ellipse cx="172" cy="136" rx="20" ry="18" fill="#C9A84C" opacity="0.6"/>
+      <ellipse cx="186" cy="143" rx="12" ry="9" fill="#B8924A" opacity="0.55"/>
+      <circle cx="174" cy="130" r="4" fill="#2D1A08" opacity="0.5"/>
+      <path d="M38 215 Q20 235 25 255 Q28 265 35 260" stroke="#C9A84C" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <rect x="118" y="242" width="14" height="50" rx="7" fill="#B8924A" opacity="0.55"/>
+      <rect x="70" y="242" width="14" height="50" rx="7" fill="#B8924A" opacity="0.55"/>
+      <rect x="90" y="178" width="36" height="12" rx="4" fill="#6B4F10" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">14</div>
+      <div class="stat-label" data-en="Regions Covered" data-uz="Viloyat qamrab olingan" data-ru="Регионов">Regions Covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label" data-en="Monthly Rides" data-uz="Oylik sayohatlar" data-ru="Поездок/мес">Monthly Rides</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-en="Vehicle Classes" data-uz="Avtomobil sinflari" data-ru="Классов авто">Vehicle Classes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LANDING PAGE - MAP SECTION
+     ============================================================ -->
+<section class="map-section" id="map-section">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow" data-en="Interactive Route Planner" data-uz="Interaktiv yo'l rejalashtiruvchi" data-ru="Интерактивный планировщик">Interactive Route Planner</div>
+    <h2 class="section-title" data-en="Plan Your Journey" data-uz="Sayohatingizni rejalashtiring" data-ru="Спланируйте поездку">Plan Your Journey</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="map-container">
+    <div class="input-panel fade-in">
+      <div class="panel-title" data-en="Origin" data-uz="Ketish joyi" data-ru="Откуда">Origin</div>
+      <div class="field-group">
+        <label class="field-label" data-en="From City / Region" data-uz="Shahar / Viloyat" data-ru="Откуда">From City / Region</label>
+        <select class="field-input" id="from-select" onchange="onFromChange()">
+          <option value="" data-en="Select origin..." data-uz="Ketish joyini tanlang..." data-ru="Выберите...">Select origin...</option>
+          <option value="tashkent">Tashkent</option>
+          <option value="samarkand">Samarkand</option>
+          <option value="bukhara">Bukhara</option>
+          <option value="namangan">Namangan</option>
+          <option value="andijan">Andijan</option>
+          <option value="fergana">Fergana</option>
+          <option value="nukus">Nukus</option>
+          <option value="urgench">Urgench</option>
+          <option value="termez">Termez</option>
+          <option value="karshi">Karshi</option>
+          <option value="jizzakh">Jizzakh</option>
+          <option value="gulistan">Gulistan</option>
+          <option value="navoiy">Navoiy</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label" data-en="Passengers" data-uz="Yo'lovchilar" data-ru="Пассажиры">Passengers</label>
+        <select class="field-input" id="passengers">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="6">5–6</option>
+          <option value="8">7–8</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label" data-en="Luggage" data-uz="Bagaj" data-ru="Багаж">Luggage</label>
+        <select class="field-input" id="luggage">
+          <option value="1"   data-en="No extra luggage" data-uz="Qo'shimcha bagaj yo'q" data-ru="Без багажа">No extra luggage</option>
+          <option value="1.05" data-en="1–2 bags" data-uz="1–2 sumka" data-ru="1–2 сумки">1–2 bags</option>
+          <option value="1.1"  data-en="Large suitcases" data-uz="Katta chamadonlar" data-ru="Большие чемоданы">Large suitcases</option>
+          <option value="1.3"  data-en="Heavy cargo" data-uz="Og'ir yuk" data-ru="Тяжёлый груз">Heavy cargo</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="map-wrapper fade-in" style="position:relative;">
+      <div class="map-title-overlay">UZBEKISTAN</div>
+      <div class="map-tooltip" id="map-tooltip"></div>
+
+      <svg id="uzbekistan-map" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="800" height="480" fill="#1A1209"/>
+        <defs>
+          <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+            <path d="M 38 0 L 0 0 0 38" fill="none" stroke="rgba(201,168,76,0.035)" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="480" fill="url(#grid)"/>
+
+        <polygon class="region" id="reg-karakalpakstan" data-name="Karakalpakstan" data-city="nukus"
+          points="30,30 220,30 232,82 212,132 182,162 142,172 102,152 62,122 30,92"/>
+        <polygon class="region" id="reg-khorezm" data-name="Khorezm" data-city="urgench"
+          points="212,82 282,72 302,112 272,142 232,142 212,132"/>
+        <polygon class="region" id="reg-navoi" data-name="Navoiy Region" data-city="navoiy"
+          points="232,142 302,112 362,122 382,152 372,202 322,232 272,222 232,192 202,162 212,132"/>
+        <polygon class="region" id="reg-bukhara" data-name="Bukhara Region" data-city="bukhara"
+          points="202,162 232,192 272,222 262,272 222,292 172,282 142,252 142,202 163,182"/>
+        <polygon class="region" id="reg-samarkand" data-name="Samarkand Region" data-city="samarkand"
+          points="322,232 372,202 422,212 442,242 422,272 372,282 332,272 302,252"/>
+        <polygon class="region" id="reg-kashkadarya" data-name="Kashkadarya" data-city="karshi"
+          points="262,272 332,272 372,282 382,322 342,352 292,342 252,312 222,292"/>
+        <polygon class="region" id="reg-surkhandarya" data-name="Surkhandarya" data-city="termez"
+          points="292,342 342,352 382,322 422,332 432,382 392,422 342,432 292,412 272,372"/>
+        <polygon class="region" id="reg-jizzakh" data-name="Jizzakh Region" data-city="jizzakh"
+          points="382,152 442,142 472,172 462,212 442,242 422,212 372,202"/>
+        <polygon class="region" id="reg-sirdaryo" data-name="Sirdaryo Region" data-city="gulistan"
+          points="442,142 502,132 532,157 512,187 482,192 462,212 472,172"/>
+        <polygon class="region" id="reg-tashkent" data-name="Tashkent Region" data-city="tashkent"
+          points="502,82 572,72 602,102 592,142 552,162 512,157 502,132"/>
+        <polygon class="region" id="reg-fergana" data-name="Fergana Region" data-city="fergana"
+          points="592,142 652,132 682,162 662,202 622,212 592,192 572,172"/>
+        <polygon class="region" id="reg-namangan" data-name="Namangan Region" data-city="namangan"
+          points="572,72 642,62 682,92 682,132 652,132 592,142 572,112"/>
+        <polygon class="region" id="reg-andijan" data-name="Andijan Region" data-city="andijan"
+          points="652,132 712,122 742,157 722,192 682,202 662,202 682,162"/>
+
+        <line id="route-line" class="route-line" x1="0" y1="0" x2="0" y2="0"/>
+
+        <g class="local-taxi-marker" id="taxi-tashkent" onclick="showTaxiPopup('tashkent',event)" transform="translate(510,90)">
+          <rect class="local-taxi-bg" x="-24" y="-14" width="48" height="22" rx="4"/>
+          <text class="local-taxi-icon-text" x="-16" y="4" font-family="Outfit,sans-serif">🚕</text>
+          <text class="local-taxi-text" x="-2" y="4">Taxi</text>
+        </g>
+        <g class="local-taxi-marker" id="taxi-samarkand" onclick="showTaxiPopup('samarkand',event)" transform="translate(355,260)">
+          <rect class="local-taxi-bg" x="-24" y="-14" width="48" height="22" rx="4"/>
+          <text class="local-taxi-icon-text" x="-16" y="4" font-family="Outfit,sans-serif">🚕</text>
+          <text class="local-taxi-text" x="-2" y="4">Taxi</text>
+        </g>
+        <g class="local-taxi-marker" id="taxi-bukhara" onclick="showTaxiPopup('bukhara',event)" transform="translate(185,260)">
+          <rect class="local-taxi-bg" x="-24" y="-14" width="48" height="22" rx="4"/>
+          <text class="local-taxi-icon-text" x="-16" y="4" font-family="Outfit,sans-serif">🚕</text>
+          <text class="local-taxi-text" x="-2" y="4">Taxi</text>
+        </g>
+        <g class="local-taxi-marker" id="taxi-fergana" onclick="showTaxiPopup('fergana',event)" transform="translate(636,192)">
+          <rect class="local-taxi-bg" x="-24" y="-14" width="48" height="22" rx="4"/>
+          <text class="local-taxi-icon-text" x="-16" y="4" font-family="Outfit,sans-serif">🚕</text>
+          <text class="local-taxi-text" x="-2" y="4">Taxi</text>
+        </g>
+        <g class="local-taxi-marker" id="taxi-namangan" onclick="showTaxiPopup('namangan',event)" transform="translate(622,115)">
+          <rect class="local-taxi-bg" x="-24" y="-14" width="48" height="22" rx="4"/>
+          <text class="local-taxi-icon-text" x="-16" y="4" font-family="Outfit,sans-serif">🚕</text>
+          <text class="local-taxi-text" x="-2" y="4">Taxi</text>
+        </g>
+
+        <circle class="city-dot" id="dot-tashkent" data-city="tashkent" cx="547" cy="117" r="5"/>
+        <text class="city-label" x="554" y="114">Tashkent</text>
+        <circle class="city-dot" id="dot-samarkand" data-city="samarkand" cx="382" cy="247" r="4"/>
+        <text class="city-label" x="389" y="244">Samarkand</text>
+        <circle class="city-dot" id="dot-bukhara" data-city="bukhara" cx="212" cy="247" r="4"/>
+        <text class="city-label" x="219" y="244">Bukhara</text>
+        <circle class="city-dot" id="dot-namangan" data-city="namangan" cx="622" cy="100" r="4"/>
+        <text class="city-label" x="629" y="97">Namangan</text>
+        <circle class="city-dot" id="dot-andijan" data-city="andijan" cx="702" cy="167" r="4"/>
+        <text class="city-label" x="709" y="164">Andijan</text>
+        <circle class="city-dot" id="dot-fergana" data-city="fergana" cx="637" cy="177" r="4"/>
+        <text class="city-label" x="644" y="174">Fergana</text>
+        <circle class="city-dot" id="dot-nukus" data-city="nukus" cx="112" cy="97" r="4"/>
+        <text class="city-label" x="119" y="94">Nukus</text>
+        <circle class="city-dot" id="dot-urgench" data-city="urgench" cx="257" cy="107" r="4"/>
+        <text class="city-label" x="264" y="104">Urgench</text>
+        <circle class="city-dot" id="dot-termez" data-city="termez" cx="347" cy="397" r="4"/>
+        <text class="city-label" x="354" y="394">Termez</text>
+        <circle class="city-dot" id="dot-karshi" data-city="karshi" cx="317" cy="312" r="4"/>
+        <text class="city-label" x="324" y="309">Karshi</text>
+        <circle class="city-dot" id="dot-jizzakh" data-city="jizzakh" cx="432" cy="187" r="4"/>
+        <text class="city-label" x="439" y="184">Jizzakh</text>
+        <circle class="city-dot" id="dot-gulistan" data-city="gulistan" cx="492" cy="160" r="4"/>
+        <text class="city-label" x="499" y="157">Gulistan</text>
+        <circle class="city-dot" id="dot-navoiy" data-city="navoiy" cx="312" cy="172" r="4"/>
+        <text class="city-label" x="319" y="169">Navoiy</text>
+
+        <g transform="translate(745,425)">
+          <circle cx="0" cy="0" r="21" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.28)" stroke-width="1"/>
+          <text x="0" y="-8" text-anchor="middle" fill="rgba(201,168,76,0.65)" font-size="9" font-family="Outfit,sans-serif" font-weight="600">N</text>
+          <line x1="0" y1="-4" x2="0" y2="-17" stroke="var(--gold)" stroke-width="1.5" opacity="0.65"/>
+          <line x1="0" y1="4" x2="0" y2="17" stroke="rgba(201,168,76,0.28)" stroke-width="1"/>
+          <line x1="-4" y1="0" x2="-17" y2="0" stroke="rgba(201,168,76,0.28)" stroke-width="1"/>
+          <line x1="4" y1="0" x2="17" y2="0" stroke="rgba(201,168,76,0.28)" stroke-width="1"/>
+        </g>
+      </svg>
+
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(181,69,27,0.8)"></div><span data-en="Origin" data-uz="Ketish joyi" data-ru="Откуда">Origin</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(26,107,107,0.8)"></div><span data-en="Destination" data-uz="Borish joyi" data-ru="Куда">Destination</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold);width:14px;height:10px;border-radius:2px;"></div><span data-en="Local Taxis" data-uz="Mahalliy taksı" data-ru="Местные такси">Local Taxis</span></div>
+      </div>
+    </div>
+
+    <div class="input-panel fade-in">
+      <div class="panel-title" data-en="Destination" data-uz="Borish joyi" data-ru="Куда">Destination</div>
+      <div class="field-group">
+        <label class="field-label" data-en="To City / Region" data-uz="Shahar / Viloyat" data-ru="Куда">To City / Region</label>
+        <select class="field-input" id="to-select" onchange="onToChange()">
+          <option value="" data-en="Select destination..." data-uz="Borish joyini tanlang..." data-ru="Выберите...">Select destination...</option>
+          <option value="tashkent">Tashkent</option>
+          <option value="samarkand">Samarkand</option>
+          <option value="bukhara">Bukhara</option>
+          <option value="namangan">Namangan</option>
+          <option value="andijan">Andijan</option>
+          <option value="fergana">Fergana</option>
+          <option value="nukus">Nukus</option>
+          <option value="urgench">Urgench</option>
+          <option value="termez">Termez</option>
+          <option value="karshi">Karshi</option>
+          <option value="jizzakh">Jizzakh</option>
+          <option value="gulistan">Gulistan</option>
+          <option value="navoiy">Navoiy</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label" data-en="Travel Date" data-uz="Sayohat sanasi" data-ru="Дата поездки">Travel Date</label>
+        <input type="date" class="field-input" id="travel-date">
+      </div>
+      <div class="field-group">
+        <label class="field-label" data-en="Time of Day" data-uz="Kun vaqti" data-ru="Время суток">Time of Day</label>
+        <select class="field-input" id="time-pref">
+          <option value="1"    data-en="Flexible (any time)" data-uz="Istalgan vaqt" data-ru="Любое время">Flexible (any time)</option>
+          <option value="1.15" data-en="Morning (6–10 AM)" data-uz="Ertalab (6–10)" data-ru="Утро (6–10)">Morning (6–10 AM)</option>
+          <option value="1"    data-en="Midday (10 AM–4 PM)" data-uz="Kunduz (10–16)" data-ru="День (10–16)">Midday (10–4 PM)</option>
+          <option value="1.2"  data-en="Evening (4–8 PM)" data-uz="Kechqurun (16–20)" data-ru="Вечер (16–20)">Evening (4–8 PM)</option>
+          <option value="1.4"  data-en="Night (after 8 PM)" data-uz="Kecha (20+)" data-ru="Ночь (после 20)">Night (after 8 PM)</option>
+        </select>
+      </div>
+      <button class="calc-btn" onclick="calculateFare()" data-en="Calculate Fare →" data-uz="Narxni hisoblash →" data-ru="Рассчитать →">Calculate Fare →</button>
+      <div class="result-box" id="result-box">
+        <div class="result-label" data-en="Estimated Fare" data-uz="Taxminiy narx" data-ru="Примерная стоимость">Estimated Fare</div>
+        <div class="result-price" id="result-price-main">— <span>SOM</span></div>
+        <div class="result-details" id="result-details-main"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL TAXI POPUP -->
+<div class="taxi-popup" id="taxi-popup">
+  <button class="taxi-popup-close" onclick="closeTaxiPopup()">✕</button>
+  <div class="taxi-popup-city" id="taxi-popup-city"></div>
+  <ul class="taxi-popup-list" id="taxi-popup-list"></ul>
+  <div class="taxi-popup-note" data-en="Tap any app to open booking. Local rides only." data-uz="Bronlash uchun ilovaga bosing. Faqat shahar ichida." data-ru="Нажмите для бронирования. Только городские поездки.">Tap any app to open booking. Local rides only.</div>
+</div>
+
+<!-- ============================================================
+     LANDING PAGE - VEHICLES
+     ============================================================ -->
+<section class="vehicles-section" id="vehicles-section">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow" data-en="Choose Your Class" data-uz="Sinfni tanlang" data-ru="Выберите класс">Choose Your Class</div>
+    <h2 class="section-title section-title-light" data-en="Select a Vehicle" data-uz="Avtomobil tanlang" data-ru="Выберите автомобиль">Select a Vehicle</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="vehicles-grid">
+    <div class="vehicle-card fade-in selected" data-multiplier="1" data-type="economy" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-budget" data-en="Economy" data-uz="Ekonom" data-ru="Эконом">Economy</div>
+      <span class="vehicle-icon">🚗</span>
+      <div class="vehicle-name">Daewoo Nexia</div>
+      <div class="vehicle-desc" data-en="Uzbekistan's beloved workhorse. Reliable, widespread, and always affordable." data-uz="O'zbekistonning eng mashhur avtomobili. Ishonchli va arzon." data-ru="Самый популярный в Узбекистане. Надёжный и доступный.">Uzbekistan's beloved workhorse. Reliable, widespread, and always affordable.</div>
+      <div class="vehicle-rate"><span class="rate-num">450</span><span class="rate-unit">SOM / km</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag">1–4 PAX</span>
+        <span class="feature-tag">AC</span>
+        <span class="feature-tag" data-en="Nationwide" data-uz="Butun mamlakat" data-ru="По всей стране">Nationwide</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+
+    <div class="vehicle-card fade-in" data-multiplier="1.35" data-type="comfort" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-budget" data-en="Comfort" data-uz="Komfort" data-ru="Комфорт">Comfort</div>
+      <span class="vehicle-icon">🚙</span>
+      <div class="vehicle-name">Chevrolet Cobalt</div>
+      <div class="vehicle-desc" data-en="Modern sedan, smooth on highways. Ideal for intercity journeys." data-uz="Zamonaviy sedan, yo'l bo'ylab qulay. Shaharlararo sayohat uchun ideal." data-ru="Современный седан для комфортных межгородских поездок.">Modern sedan, smooth on highways. Ideal for intercity journeys.</div>
+      <div class="vehicle-rate"><span class="rate-num">610</span><span class="rate-unit">SOM / km</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag">1–4 PAX</span>
+        <span class="feature-tag">USB</span>
+        <span class="feature-tag">GPS</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+
+    <div class="vehicle-card fade-in" data-multiplier="1.8" data-type="premium" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-premium" data-en="Premium" data-uz="Premium" data-ru="Премиум">Premium</div>
+      <span class="vehicle-icon">🚘</span>
+      <div class="vehicle-name">Chevrolet Malibu</div>
+      <div class="vehicle-desc" data-en="Executive comfort. Leather seats, climate control, professional chauffeur." data-uz="Biznes komfort. Charm o'rindiqlar, iqlim nazorati, professional haydovchi." data-ru="Бизнес-класс. Кожаный салон, климат-контроль, профессиональный водитель.">Executive comfort. Leather seats, climate control, professional chauffeur.</div>
+      <div class="vehicle-rate"><span class="rate-num">810</span><span class="rate-unit">SOM / km</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag">1–4 PAX</span>
+        <span class="feature-tag" data-en="Leather" data-uz="Charm" data-ru="Кожа">Leather</span>
+        <span class="feature-tag">Wi-Fi</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+
+    <div class="vehicle-card fade-in" data-multiplier="1.5" data-type="electric" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-eco" data-en="Electric" data-uz="Elektr" data-ru="Электро">Electric</div>
+      <span class="vehicle-icon">⚡</span>
+      <div class="vehicle-name">BYD Atto 3</div>
+      <div class="vehicle-desc" data-en="Zero emissions, whisper quiet. Eco-friendly ride available in major cities." data-uz="Nol emissiya, jim harakat. Yirik shaharlarda mavjud." data-ru="Нулевые выбросы, тихая езда. Доступен в крупных городах.">Zero emissions, whisper quiet. Eco-friendly ride available in major cities.</div>
+      <div class="vehicle-rate"><span class="rate-num">680</span><span class="rate-unit">SOM / km</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag">1–4 PAX</span>
+        <span class="feature-tag">Eco</span>
+        <span class="feature-tag">Wi-Fi</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+
+    <div class="vehicle-card fade-in" data-multiplier="1.25" data-type="minivan" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-budget" data-en="Group" data-uz="Guruh" data-ru="Группа">Group</div>
+      <span class="vehicle-icon">🚐</span>
+      <div class="vehicle-name">Minivan Sprinter</div>
+      <div class="vehicle-desc" data-en="Perfect for families and groups. Spacious interior, large luggage room." data-uz="Oila va guruhlar uchun ideal. Keng salon, katta bagaj joyi." data-ru="Идеально для семей и групп. Просторный салон, большой багажник.">Perfect for families and groups. Spacious interior, large luggage room.</div>
+      <div class="vehicle-rate"><span class="rate-num">560</span><span class="rate-unit">SOM / km · seat</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag">Up to 8 PAX</span>
+        <span class="feature-tag" data-en="Large Trunk" data-uz="Katta bagaj" data-ru="Большой багажник">Large Trunk</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+
+    <div class="vehicle-card fade-in" data-multiplier="2.2" data-type="cargo" onclick="selectVehicle(this)">
+      <div class="vehicle-badge badge-cargo" data-en="Cargo" data-uz="Yuk" data-ru="Груз">Cargo</div>
+      <span class="vehicle-icon">🚛</span>
+      <div class="vehicle-name" data-en="Cargo Van / Truck" data-uz="Yuk mashinasi" data-ru="Грузовик">Cargo Van / Truck</div>
+      <div class="vehicle-desc" data-en="For heavy luggage, business goods, or moving. Available intercity freight." data-uz="Og'ir yuk, biznes mollari yoki ko'chish uchun. Shaharlararo yuk." data-ru="Тяжёлый груз, деловые товары или переезд. Межгородские перевозки.">For heavy luggage, business goods, or moving. Available intercity freight.</div>
+      <div class="vehicle-rate"><span class="rate-num">990</span><span class="rate-unit">SOM / km</span></div>
+      <div class="vehicle-features">
+        <span class="feature-tag" data-en="Freight" data-uz="Yuk tashish" data-ru="Грузоперевозка">Freight</span>
+        <span class="feature-tag" data-en="Insured" data-uz="Sug'urtalangan" data-ru="Застрахован">Insured</span>
+      </div>
+      <div class="selected-indicator"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LANDING PAGE - ROUTES
+     ============================================================ -->
+<section class="routes-section" id="routes-section">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow" data-en="Most Traveled" data-uz="Eng mashhur" data-ru="Популярные">Most Traveled</div>
+    <h2 class="section-title" data-en="Popular Routes" data-uz="Mashhur yo'nalishlar" data-ru="Популярные маршруты">Popular Routes</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="routes-grid">
+    <div class="route-card fade-in" onclick="prefillRoute('tashkent','samarkand')">
+      <div class="route-icon-wrap">🏛️</div>
+      <div class="route-info">
+        <div class="route-path">Tashkent <span>→</span> Samarkand</div>
+        <div class="route-meta"><span>~340 km</span><span>~3.5 h</span></div>
+      </div>
+      <div class="route-price-badge">153,000+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('tashkent','bukhara')">
+      <div class="route-icon-wrap">🕌</div>
+      <div class="route-info">
+        <div class="route-path">Tashkent <span>→</span> Bukhara</div>
+        <div class="route-meta"><span>~560 km</span><span>~6 h</span></div>
+      </div>
+      <div class="route-price-badge">252,000+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('samarkand','bukhara')">
+      <div class="route-icon-wrap">🌙</div>
+      <div class="route-info">
+        <div class="route-path">Samarkand <span>→</span> Bukhara</div>
+        <div class="route-meta"><span>~270 km</span><span>~3 h</span></div>
+      </div>
+      <div class="route-price-badge">121,500+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('tashkent','namangan')">
+      <div class="route-icon-wrap">🏔️</div>
+      <div class="route-info">
+        <div class="route-path">Tashkent <span>→</span> Namangan</div>
+        <div class="route-meta"><span>~310 km</span><span>~4 h</span></div>
+      </div>
+      <div class="route-price-badge">139,500+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('tashkent','andijan')">
+      <div class="route-icon-wrap">🌸</div>
+      <div class="route-info">
+        <div class="route-path">Tashkent <span>→</span> Andijan</div>
+        <div class="route-meta"><span>~380 km</span><span>~5 h</span></div>
+      </div>
+      <div class="route-price-badge">171,000+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('tashkent','termez')">
+      <div class="route-icon-wrap">🏜️</div>
+      <div class="route-info">
+        <div class="route-path">Tashkent <span>→</span> Termez</div>
+        <div class="route-meta"><span>~700 km</span><span>~8 h</span></div>
+      </div>
+      <div class="route-price-badge">315,000+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('urgench','nukus')">
+      <div class="route-icon-wrap">🌊</div>
+      <div class="route-info">
+        <div class="route-path">Urgench <span>→</span> Nukus</div>
+        <div class="route-meta"><span>~170 km</span><span>~2 h</span></div>
+      </div>
+      <div class="route-price-badge">76,500+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('fergana','tashkent')">
+      <div class="route-icon-wrap">🚗</div>
+      <div class="route-info">
+        <div class="route-path">Fergana <span>→</span> Tashkent</div>
+        <div class="route-meta"><span>~420 km</span><span>~5 h</span></div>
+      </div>
+      <div class="route-price-badge">189,000+<small>SOM / Economy</small></div>
+    </div>
+    <div class="route-card fade-in" onclick="prefillRoute('bukhara','termez')">
+      <div class="route-icon-wrap">⭐</div>
+      <div class="route-info">
+        <div class="route-path">Bukhara <span>→</span> Termez</div>
+        <div class="route-meta"><span>~480 km</span><span>~5.5 h</span></div>
+      </div>
+      <div class="route-price-badge">216,000+<small>SOM / Economy</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LANDING PAGE - HOW IT WORKS
+     ============================================================ -->
+<section class="how-section" id="how-section">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow" data-en="Simple & Fast" data-uz="Oddiy va tez" data-ru="Просто и быстро">Simple & Fast</div>
+    <h2 class="section-title section-title-light" data-en="How Kervan Works" data-uz="Kervan qanday ishlaydi" data-ru="Как работает Kervan">How Kervan Works</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="steps-grid">
+    <div class="step fade-in">
+      <div class="step-num">01</div>
+      <div class="step-title" data-en="Choose Route" data-uz="Yo'nalishni tanlang" data-ru="Выберите маршрут">Choose Route</div>
+      <div class="step-desc" data-en="Select origin and destination from any of Uzbekistan's 14 regions." data-uz="O'zbekistonning 14 viloyatidan ketish va borish joyini tanlang." data-ru="Выберите откуда и куда из 14 регионов Узбекистана.">Select origin and destination from any of Uzbekistan's 14 regions.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">02</div>
+      <div class="step-title" data-en="Pick Vehicle" data-uz="Avtomobil tanlang" data-ru="Выберите авто">Pick Vehicle</div>
+      <div class="step-desc" data-en="Economy, comfort, premium, electric, minivan, or cargo — every need covered." data-uz="Ekonom, komfort, premium, elektr, miniven yoki yuk — har bir ehtiyoj uchun." data-ru="Эконом, комфорт, премиум, электро, минивэн или грузовик.">Economy, comfort, premium, electric, minivan, or cargo — every need covered.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">03</div>
+      <div class="step-title" data-en="Get Fair Price" data-uz="Adolatli narx" data-ru="Честная цена">Get Fair Price</div>
+      <div class="step-desc" data-en="Transparent pricing in Uzbek SOM. No hidden fees. Confirmed before you ride." data-uz="O'zbek so'mida shaffof narxlash. Yashirin to'lovlar yo'q." data-ru="Прозрачные цены в сумах. Без скрытых комиссий.">Transparent pricing in Uzbek SOM. No hidden fees. Confirmed before you ride.</div>
+    </div>
+    <div class="step fade-in">
+      <div class="step-num">04</div>
+      <div class="step-title" data-en="Ride Confidently" data-uz="Ishonch bilan yuring" data-ru="Езжайте спокойно">Ride Confidently</div>
+      <div class="step-desc" data-en="Verified drivers, real-time tracking, 24/7 customer support across every journey." data-uz="Tasdiqlangan haydovchilar, real vaqt kuzatuvi, 24/7 qo'llab-quvvatlash." data-ru="Проверенные водители, отслеживание в реальном времени, поддержка 24/7.">Verified drivers, real-time tracking, 24/7 customer support across every journey.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a class="footer-logo" href="#">
+        <svg class="footer-logo-camel" viewBox="0 0 220 300" fill="none">
+          <ellipse cx="110" cy="210" rx="72" ry="45" fill="#C9A84C" opacity="0.7"/>
+          <ellipse cx="130" cy="178" rx="28" ry="32" fill="#C9A84C" opacity="0.7"/>
+          <ellipse cx="90" cy="183" rx="22" ry="26" fill="#C9A84C" opacity="0.65"/>
+          <rect x="155" y="148" width="22" height="55" rx="11" fill="#C9A84C" opacity="0.7"/>
+          <ellipse cx="172" cy="136" rx="20" ry="18" fill="#C9A84C" opacity="0.7"/>
+          <ellipse cx="186" cy="143" rx="12" ry="9" fill="#B8924A" opacity="0.65"/>
+          <rect x="118" y="242" width="14" height="50" rx="7" fill="#B8924A" opacity="0.65"/>
+          <rect x="70" y="242" width="14" height="50" rx="7" fill="#B8924A" opacity="0.65"/>
+        </svg>
+        <span class="footer-logo-name">Kervan</span>
+      </a>
+      <p class="footer-tagline" data-en="Connecting every corner of the Silk Road nation. Safe, affordable, and always on time." data-uz="Ipak yo'li mamlakatining har bir burchagini bog'laymiz. Xavfsiz, arzon va doim vaqtida." data-ru="Соединяем каждый уголок страны Шёлкового пути. Безопасно, доступно, вовремя.">Connecting every corner of the Silk Road nation. Safe, affordable, and always on time.</p>
+    </div>
+    <div>
+      <div class="footer-heading" data-en="Destinations" data-uz="Manzillar" data-ru="Направления">Destinations</div>
+      <ul class="footer-links">
+        <li><a href="#">Tashkent</a></li>
+        <li><a href="#">Samarkand</a></li>
+        <li><a href="#">Bukhara</a></li>
+        <li><a href="#" data-en="Fergana Valley" data-uz="Farg'ona vodiysi" data-ru="Ферганская долина">Fergana Valley</a></li>
+        <li><a href="#">Karakalpakstan</a></li>
+        <li><a href="#" data-en="All Regions" data-uz="Barcha viloyatlar" data-ru="Все регионы">All Regions</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading" data-en="Company" data-uz="Kompaniya" data-ru="Компания">Company</div>
+      <ul class="footer-links">
+        <li><a href="#" data-en="About Kervan" data-uz="Kervan haqida" data-ru="О Kervan">About Kervan</a></li>
+        <li><a href="#" data-en="Drive With Us" data-uz="Biz bilan ishlang" data-ru="Работайте с нами">Drive With Us</a></li>
+        <li><a href="#" data-en="Business Rides" data-uz="Biznes sayohatlari" data-ru="Бизнес-поездки">Business Rides</a></li>
+        <li><a href="#" data-en="Safety Center" data-uz="Xavfsizlik markazi" data-ru="Центр безопасности">Safety Center</a></li>
+        <li><a href="#" data-en="Press" data-uz="Matbuot" data-ru="Пресса">Press</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading" data-en="Support" data-uz="Qo'llab-quvvatlash" data-ru="Поддержка">Support</div>
+      <ul class="footer-links">
+        <li><a href="#" data-en="Help Center" data-uz="Yordam markazi" data-ru="Центр помощи">Help Center</a></li>
+        <li><a href="#" data-en="Track My Ride" data-uz="Sayohatimni kuzatish" data-ru="Отследить поездку">Track My Ride</a></li>
+        <li><a href="#" data-en="Refund Policy" data-uz="Qaytarish siyosati" data-ru="Политика возврата">Refund Policy</a></li>
+        <li><a href="#">+998 71 000 0000</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy" data-en="© 2025 Kervan. All rights reserved. Tashkent, Uzbekistan." data-uz="© 2025 Kervan. Barcha huquqlar himoyalangan. Toshkent, O'zbekiston." data-ru="© 2025 Kervan. Все права защищены. Ташкент, Узбекистан.">© 2025 Kervan. All rights reserved. Tashkent, Uzbekistan.</div>
+    <div class="footer-langs-bottom">
+      <button onclick="setLang('en')" class="active">EN</button>
+      <button onclick="setLang('uz')">UZ</button>
+      <button onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     DRIVER PORTAL - AUTH SCREEN
+     ============================================================ -->
+<div id="auth-screen">
+  <div class="auth-stars" id="auth-stars"></div>
+  <div class="auth-ring"></div>
+  <div class="auth-ring"></div>
+
+  <div class="auth-box">
+    <div class="auth-logo">
+      <svg class="auth-logo-camel" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="140" rx="65" ry="30" fill="#C9A84C" opacity="0.15"/>
+        <rect x="60" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="115" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="72" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <rect x="108" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <ellipse cx="100" cy="120" rx="52" ry="32" fill="#C9A84C"/>
+        <ellipse cx="145" cy="90" rx="22" ry="28" fill="#C9A84C"/>
+        <ellipse cx="100" cy="88" rx="28" ry="16" fill="#C9A84C"/>
+        <ellipse cx="158" cy="70" rx="12" ry="20" fill="#C9A84C"/>
+        <circle cx="163" cy="58" r="8" fill="#C9A84C"/>
+        <ellipse cx="167" cy="53" rx="4" ry="3" fill="#C9A84C"/>
+        <circle cx="159" cy="52" r="2" fill="#1A1209"/>
+        <path d="M 162 56 Q 170 50 174 54" stroke="#8B6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="72" cy="88" rx="18" ry="10" fill="#8B6914" opacity="0.4"/>
+        <ellipse cx="128" cy="88" rx="18" ry="10" fill="#8B6914" opacity="0.4"/>
+        <path d="M 48 120 Q 35 110 38 125" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 38 125 Q 30 130 35 135" stroke="#8B6914" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="auth-logo-name">KERVAN</span>
+    </div>
+    <div class="auth-role-badge">🚗 &nbsp; Driver Portal &nbsp; — &nbsp; Haydovchi Tizimi</div>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Kirish</button>
+        <button class="auth-tab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</button>
+      </div>
+
+      <div class="auth-form-panel active" id="panel-login">
+        <div class="auth-error" id="login-error">Telefon raqam yoki parol noto'g'ri.</div>
+        <div class="field-group">
+          <div class="field-label">Telefon raqam</div>
+          <div class="auth-phone-group">
+            <input class="auth-phone-prefix" value="+998" readonly>
+            <input class="field-input" id="login-phone" type="tel" placeholder="90 123 45 67" maxlength="12">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parol</div>
+          <input class="field-input" id="login-pass" type="password" placeholder="••••••••">
+        </div>
+        <div class="auth-forgot" onclick="showOtpPanel()">Parolni unutdingizmi? SMS orqali tiklash</div>
+        <button class="auth-btn" onclick="doLogin()">Kirish →</button>
+        <div class="auth-divider">YOKI</div>
+        <div class="auth-terms">Demo uchun istalgan ma'lumot kiriting va <span style="color:var(--gold)">Kirish</span> tugmasini bosing</div>
+      </div>
+
+      <div class="auth-form-panel" id="panel-otp">
+        <div class="auth-success" id="otp-sent" style="display:block;">SMS kod yuborildi: +998 ** *** ** **</div>
+        <div class="field-group">
+          <div class="field-label" style="text-align:center;">SMS kodini kiriting</div>
+          <div class="otp-inputs">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,1)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,2)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,3)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,4)">
+          </div>
+        </div>
+        <div class="otp-resend">Kodni olmadingizmi? <span onclick="showToast('📱','SMS qayta yuborildi','30 soniyada qayta so\'rang')">Qayta yuborish</span></div>
+        <button class="auth-btn" onclick="doLogin()">Tasdiqlash →</button>
+        <button class="auth-btn" style="background:none;border:1px solid var(--border);color:rgba(245,237,214,0.5);margin-top:0;" onclick="switchAuthTab('login')">← Orqaga</button>
+      </div>
+
+      <div class="auth-form-panel" id="panel-register">
+        <div class="auth-error" id="reg-error"></div>
+        <div class="field-row">
+          <div class="field-group">
+            <div class="field-label">Ism</div>
+            <input class="field-input" id="reg-fname" placeholder="Jasur">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Familya</div>
+            <input class="field-input" id="reg-lname" placeholder="Toshmatov">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Telefon raqam</div>
+          <div class="auth-phone-group">
+            <input class="auth-phone-prefix" value="+998" readonly>
+            <input class="field-input" id="reg-phone" type="tel" placeholder="90 123 45 67">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parol</div>
+          <input class="field-input" id="reg-pass" type="password" placeholder="Kamida 8 belgi">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parolni tasdiqlang</div>
+          <input class="field-input" id="reg-pass2" type="password" placeholder="••••••••">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Shahar</div>
+          <select class="field-input" id="reg-city">
+            <option value="">Shaharni tanlang...</option>
+            <option>Toshkent</option><option>Samarqand</option><option>Buxoro</option>
+            <option>Namangan</option><option>Andijon</option><option>Farg'ona</option>
+            <option>Nukus</option><option>Urganch</option><option>Termiz</option>
+          </select>
+        </div>
+        <button class="auth-btn" onclick="doRegister()">Ro'yxatdan o'tish →</button>
+        <div class="auth-terms">Ro'yxatdan o'tish orqali siz Kervan <a>Foydalanish shartlari</a> va <a>Maxfiylik siyosatimiz</a>ga rozilik bildirasiz.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     DRIVER PORTAL - MAIN APP
+     ============================================================ -->
+<div id="main-app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar-logo" href="#">
+      <svg class="sidebar-logo-camel" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="140" rx="65" ry="30" fill="#C9A84C" opacity="0.15"/>
+        <rect x="60" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="115" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="72" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <rect x="108" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <ellipse cx="100" cy="120" rx="52" ry="32" fill="#C9A84C"/>
+        <ellipse cx="145" cy="90" rx="22" ry="28" fill="#C9A84C"/>
+        <ellipse cx="100" cy="88" rx="28" ry="16" fill="#C9A84C"/>
+        <ellipse cx="158" cy="70" rx="12" ry="20" fill="#C9A84C"/>
+        <circle cx="163" cy="58" r="8" fill="#C9A84C"/>
+        <circle cx="159" cy="52" r="2" fill="#1A1209"/>
+      </svg>
+      <div>
+        <div class="sidebar-logo-name">KERVAN</div>
+        <div class="sidebar-logo-sub">Driver Portal</div>
+      </div>
+    </a>
+
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar" onclick="navigate('profile')">
+        <span id="avatar-initials">JT</span>
+        <div class="online-badge" id="online-badge"></div>
+      </div>
+      <div class="sidebar-profile-info">
+        <div class="sidebar-profile-name" id="sidebar-driver-name">Jasur Toshmatov</div>
+        <div class="sidebar-profile-id">ID: KRV-04821</div>
+        <div class="sidebar-profile-status" id="status-label" onclick="toggleOnline()">Onlayn</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Asosiy</div>
+      <a class="nav-item active" id="nav-dashboard" onclick="navigate('dashboard')">
+        <span class="nav-item-icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" id="nav-trips" onclick="navigate('trips')">
+        <span class="nav-item-icon">🗺️</span> Sayohatlar
+        <span class="nav-badge gold" id="active-trip-badge" style="display:none">1</span>
+      </a>
+      <a class="nav-item" id="nav-earnings" onclick="navigate('earnings')">
+        <span class="nav-item-icon">💰</span> Daromad
+      </a>
+
+      <div class="nav-section-label">Mening Hisobim</div>
+      <a class="nav-item" id="nav-profile" onclick="navigate('profile')">
+        <span class="nav-item-icon">👤</span> Profil
+      </a>
+      <a class="nav-item" id="nav-vehicle" onclick="navigate('vehicle')">
+        <span class="nav-item-icon">🚗</span> Avtomobil
+      </a>
+      <a class="nav-item" id="nav-notifications" onclick="navigate('notifications')">
+        <span class="nav-item-icon">🔔</span> Bildirishnomalar
+        <span class="nav-badge" id="notif-count">3</span>
+      </a>
+
+      <div class="nav-section-label">Yordam</div>
+      <a class="nav-item" id="nav-support" onclick="navigate('support')">
+        <span class="nav-item-icon">❓</span> Yordam markazi
+      </a>
+      <a class="nav-item" onclick="showLogoutModal()">
+        <span class="nav-item-icon">🚪</span> Chiqish
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-online" id="online-toggle" onclick="toggleOnline()">
+        ONLAYN &nbsp; ●
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="page-title" id="topbar-title">Dashboard</span>
+        <span class="page-breadcrumb" id="topbar-breadcrumb">Xush kelibsiz, Jasur!</span>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn notif-dot" onclick="navigate('notifications')">🔔</button>
+        <button class="topbar-btn" onclick="showRideRequest()">🧪 Yangi So'rov</button>
+        <button class="topbar-btn primary" onclick="toggleOnline()" id="topbar-status-btn">● Onlayn</button>
+      </div>
+    </div>
+
+    <!-- PAGES: Dashboard, Trips, Earnings, Profile, Vehicle, Notifications, Support -->
+    <div class="page active" id="page-dashboard">
+      <div class="live-banner" id="live-banner">
+        <div class="live-indicator">
+          <div class="live-dot" id="live-dot"></div>
+          <div>
+            <div class="live-text" id="live-text">Faol — Buyurtmalar qabul qilinmoqda</div>
+            <div class="live-since">Bugun soat 09:14 dan beri onlayn</div>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:0.65rem;color:rgba(245,237,214,0.35);letter-spacing:0.1em;text-transform:uppercase;">Faoliyat vaqti</div>
+          <div class="live-timer" id="live-timer">2:47:33</div>
+        </div>
+      </div>
+
+      <div class="grid-4 mb-2">
+        <div class="card card-gold-top">
+          <div class="card-label">Bugungi daromad</div>
+          <div class="card-value gold" id="kpi-today">187,500</div>
+          <div class="card-meta up">↑ +12% kecha</div>
+          <div class="earnings-chart" id="weekly-bars"></div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Bugungi sayohatlar</div>
+          <div class="card-value" id="kpi-trips">8</div>
+          <div class="card-meta">Maqsad: 12 ta</div>
+          <div style="margin-top:1rem;background:rgba(255,255,255,0.06);height:5px;border-radius:3px;overflow:hidden;">
+            <div style="width:66%;height:100%;background:var(--gold);border-radius:3px;transition:width 1s ease;"></div>
+          </div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Reyting</div>
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div class="rating-ring">
+              <svg width="100" height="100" viewBox="0 0 100 100">
+                <circle class="rating-ring-bg" cx="50" cy="50" r="42"/>
+                <circle class="rating-ring-fill" cx="50" cy="50" r="42"
+                  stroke-dasharray="263.9" stroke-dashoffset="26" id="rating-circle"/>
+              </svg>
+              <div class="rating-center">
+                <div class="rating-num">4.9</div>
+                <div class="rating-of">/ 5.0</div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.72rem;color:rgba(245,237,214,0.4);">Jami: <b style="color:var(--cream)">412</b> ta baho</div>
+              <div style="font-size:0.72rem;color:rgba(245,237,214,0.4);margin-top:0.4rem;">⭐⭐⭐⭐⭐ — 94%</div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Qabul qilish darajasi</div>
+          <div class="card-value green">93%</div>
+          <div class="card-meta up">↑ Zo'r!</div>
+          <div style="margin-top:0.8rem;font-size:0.72rem;color:rgba(245,237,214,0.35);line-height:1.7;">
+            Rad etilgan: <b style="color:var(--cream)">3</b><br>
+            Bekor qilingan: <b style="color:var(--cream)">1</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="flex-between mb-2">
+            <div style="font-family:'Cinzel',serif;font-size:0.88rem;font-weight:700;color:var(--cream);letter-spacing:0.08em;">So'nggi sayohatlar</div>
+            <button class="topbar-btn" onclick="navigate('trips')" style="font-size:0.65rem;padding:0.3rem 0.7rem;">Barchasi →</button>
+          </div>
+          <div class="trip-list" id="recent-trips-list"></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1.3rem;">
+          <div class="card">
+            <div class="card-label">Bugungi maqsad</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0.7rem;">
+              <span style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:700;color:var(--gold);">187,500 so'm</span>
+              <span style="font-size:0.75rem;color:rgba(245,237,214,0.35);">Maqsad: 300,000</span>
+            </div>
+            <div style="background:rgba(255,255,255,0.06);height:8px;border-radius:4px;overflow:hidden;">
+              <div style="width:62%;height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));border-radius:4px;transition:width 1.2s ease;"></div>
+            </div>
+            <div style="margin-top:0.7rem;font-size:0.72rem;color:rgba(245,237,214,0.35);">Yana 112,500 so'm kerak</div>
+          </div>
+
+          <div class="card" style="background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.35);">
+            <div class="card-label" style="color:var(--gold);">⚡ Bonus zonasi faol</div>
+            <div style="font-size:0.88rem;color:var(--cream);font-weight:600;margin:0.5rem 0;">Toshkent — Samarqand yo'li</div>
+            <div style="font-size:0.78rem;color:rgba(245,237,214,0.5);line-height:1.6;">
+              Hozir bu yo'nalishda sayohat qilsangiz, tarifga <b style="color:var(--gold)">+20% bonus</b> qo'shiladi.<br>
+              <span style="font-size:0.7rem;color:rgba(245,237,214,0.3);">Taklif tugaydi: 18:00 gacha</span>
+            </div>
+          </div>
+
+          <div class="card" style="background:rgba(26,107,107,0.08);border-color:rgba(26,107,107,0.3);">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div class="card-label" style="color:rgba(26,107,107,0.9);">Ob-havo — Toshkent</div>
+                <div style="font-size:1.6rem;margin:0.3rem 0;">☀️ <span style="font-family:'Cinzel',serif;font-size:1.4rem;color:var(--cream);">28°C</span></div>
+                <div style="font-size:0.75rem;color:rgba(245,237,214,0.4);">Quruq, yaxshi ko'rinish</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:0.7rem;color:rgba(245,237,214,0.3);margin-bottom:0.4rem;">Yo'lda talabalar</div>
+                <div style="font-family:'Cinzel',serif;font-size:1.5rem;color:var(--green-light);">Yuqori</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MORE PAGES: Trips, Earnings, Profile, Vehicle, Notifications, Support (HTML omitted for brevity - same as original file 1) -->
+    <div class="page" id="page-trips">
+      <div class="section-header">
+        <div class="section-title">Sayohatlar tarixi</div>
+        <div class="section-sub">Barcha qabul qilingan va bekor qilingan sayohatlar</div>
+      </div>
+      <div class="trips-filters">
+        <button class="filter-btn active" onclick="filterTrips('all',this)">Barchasi</button>
+        <button class="filter-btn" onclick="filterTrips('completed',this)">Bajarilgan</button>
+        <button class="filter-btn" onclick="filterTrips('cancelled',this)">Bekor qilingan</button>
+        <button class="filter-btn" onclick="filterTrips('active',this)">Faol</button>
+        <input type="date" class="field-input" style="width:160px;padding:0.4rem 0.7rem;font-size:0.78rem;" id="trips-date-filter" onchange="renderTripsTable()">
+      </div>
+      <div class="card" style="overflow-x:auto;padding:0;">
+        <table class="trips-table" id="trips-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Yo'nalish</th>
+              <th>Masofa</th>
+              <th>Vaqt</th>
+              <th>Summa</th>
+              <th>To'lov usuli</th>
+              <th>Reyting</th>
+              <th>Holat</th>
+            </tr>
+          </thead>
+          <tbody id="trips-tbody"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;flex-wrap:wrap;gap:1rem;">
+        <div style="font-size:0.78rem;color:rgba(245,237,214,0.35);" id="trips-count-label"></div>
+        <div style="display:flex;gap:0.5rem;" id="pagination"></div>
+      </div>
+    </div>
+
+    <div class="page" id="page-earnings">
+      <div class="section-header">
+        <div class="section-title">Daromad & To'lovlar</div>
+        <div class="section-sub">Kunlik, haftalik va oylik statistika</div>
+      </div>
+      <div class="grid-4 mb-2">
+        <div class="card card-gold-top">
+          <div class="card-label">Bugun</div>
+          <div class="card-value gold">187,500</div>
+          <div class="card-meta">so'm</div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Bu hafta</div>
+          <div class="card-value gold">1,240,000</div>
+          <div class="card-meta up">↑ +8%</div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Bu oy</div>
+          <div class="card-value gold">4,875,000</div>
+          <div class="card-meta up">↑ +15%</div>
+        </div>
+        <div class="card card-gold-top">
+          <div class="card-label">Umumiy (jami)</div>
+          <div class="card-value">42.1M</div>
+          <div class="card-meta">so'm — barcha vaqt</div>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="flex-between mb-2">
+          <div style="font-family:'Cinzel',serif;font-size:0.88rem;font-weight:700;color:var(--cream);letter-spacing:0.08em;">Daromad grafigi</div>
+          <div class="earnings-period-selector">
+            <button class="period-btn active" onclick="setPeriod('week',this)">Hafta</button>
+            <button class="period-btn" onclick="setPeriod('month',this)">Oy</button>
+            <button class="period-btn" onclick="setPeriod('year',this)">Yil</button>
+          </div>
+        </div>
+        <div class="big-bar-chart" id="big-bar-chart"></div>
+        <div class="chart-x-labels" id="chart-x-labels"></div>
+      </div>
+      <div class="grid-2 mb-2">
+        <div class="card">
+          <div style="font-family:'Cinzel',serif;font-size:0.88rem;font-weight:700;color:var(--cream);letter-spacing:0.08em;margin-bottom:1.2rem;">Daromad taqsimoti</div>
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Shaharlararo sayohatlar</span>
+              <div class="breakdown-bar-wrap"><div class="breakdown-bar-fill" style="width:78%;"></div></div>
+              <span class="breakdown-value">3,802,500 so'm</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Shahar ichida</span>
+              <div class="breakdown-bar-wrap"><div class="breakdown-bar-fill" style="width:55%;background:var(--teal);"></div></div>
+              <span class="breakdown-value">688,500 so'm</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Bonus va mukofotlar</span>
+              <div class="breakdown-bar-wrap"><div class="breakdown-bar-fill" style="width:25%;background:var(--green-light);"></div></div>
+              <span class="breakdown-value">243,750 so'm</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Kervan komissiyasi (−12%)</span>
+              <div class="breakdown-bar-wrap"><div class="breakdown-bar-fill" style="width:12%;background:var(--rust);"></div></div>
+              <span class="breakdown-value" style="color:#E8835A;">−585,000 so'm</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-family:'Cinzel',serif;font-size:0.88rem;font-weight:700;color:var(--cream);letter-spacing:0.08em;margin-bottom:1.2rem;">To'lov usullari</div>
+          <div style="display:flex;flex-direction:column;gap:0.9rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0.8rem;background:rgba(255,255,255,0.025);border:1px solid var(--border);">
+              <div style="display:flex;align-items:center;gap:0.7rem;">
+                <span style="font-size:1.3rem;">💵</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600;color:var(--cream);">Naqd pul</div>
+                  <div style="font-size:0.68rem;color:rgba(245,237,214,0.35);">62% sayohatlar</div>
+                </div>
+              </div>
+              <div style="font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold);">3,022,500</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0.8rem;background:rgba(255,255,255,0.025);border:1px solid var(--border);">
+              <div style="display:flex;align-items:center;gap:0.7rem;">
+                <span style="font-size:1.3rem;">💳</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600;color:var(--cream);">Karta (Click/Payme)</div>
+                  <div style="font-size:0.68rem;color:rgba(245,237,214,0.35);">38% sayohatlar</div>
+                </div>
+              </div>
+              <div style="font-family:'Cinzel',serif;font-size:0.95rem;font-weight:700;color:var(--gold);">1,852,500</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="withdraw-section">
+        <div class="flex-between mb-1" style="flex-wrap:wrap;gap:1rem;">
+          <div class="withdraw-balance">
+            <div class="withdraw-balance-label">Hisobdagi balans</div>
+            <div class="withdraw-balance-amount">2,340,000 so'm</div>
+            <div class="withdraw-balance-sub">Keyingi to'lov sanasi: 15-May</div>
+          </div>
+          <button class="withdraw-btn" onclick="showWithdrawModal()">Pul yechish →</button>
+        </div>
+        <div style="font-size:0.72rem;color:rgba(245,237,214,0.35);margin-bottom:0.8rem;letter-spacing:0.08em;text-transform:uppercase;">To'lov usulini tanlang</div>
+        <div class="withdraw-methods">
+          <div class="pay-method selected" onclick="selectPayMethod(this)"><span class="pay-method-icon">💳</span> Click</div>
+          <div class="pay-method" onclick="selectPayMethod(this)"><span class="pay-method-icon">📱</span> Payme</div>
+          <div class="pay-method" onclick="selectPayMethod(this)"><span class="pay-method-icon">🏦</span> Bank</div>
+          <div class="pay-method" onclick="selectPayMethod(this)"><span class="pay-method-icon">💵</span> Naqd</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-profile">
+      <div class="profile-hero">
+        <div class="profile-avatar-big">
+          <span id="profile-initials">JT</span>
+          <div class="profile-avatar-edit" onclick="showToast('📷','Rasm yuklash','Kamera yoki galereyadan tanlang')">✏️</div>
+        </div>
+        <div class="profile-main-info">
+          <div class="profile-name" id="profile-full-name">Jasur Toshmatov</div>
+          <div class="profile-id-row">
+            <div class="profile-driver-id">Haydovchi ID: KRV-04821</div>
+            <div class="profile-verified">Tasdiqlangan haydovchi</div>
+          </div>
+          <div class="profile-stats-row">
+            <div class="profile-stat">
+              <div class="profile-stat-val">412</div>
+              <div class="profile-stat-label">Sayohat</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val">4.9 ⭐</div>
+              <div class="profile-stat-label">Reyting</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val">2 yil</div>
+              <div class="profile-stat-label">Tajriba</div>
+            </div>
+            <div class="profile-stat">
+              <div class="profile-stat-val">93%</div>
+              <div class="profile-stat-label">Qabul %</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="form-section-title">👤 Shaxsiy ma'lumotlar</div>
+        <div class="form-grid">
+          <div class="field-group">
+            <div class="field-label">Ism</div>
+            <input class="field-input" id="pf-fname" value="Jasur">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Familya</div>
+            <input class="field-input" id="pf-lname" value="Toshmatov">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Telefon</div>
+            <input class="field-input" id="pf-phone" value="+998 90 123 45 67">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Elektron pochta</div>
+            <input class="field-input" id="pf-email" type="email" value="jasur.toshmatov@gmail.com">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Shahar</div>
+            <select class="field-input" id="pf-city">
+              <option selected>Toshkent</option>
+              <option>Samarqand</option><option>Buxoro</option><option>Namangan</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <div class="field-label">Tug'ilgan sana</div>
+            <input class="field-input" type="date" id="pf-dob" value="1992-05-18">
+          </div>
+        </div>
+        <div style="margin-top:1.2rem;display:flex;gap:0.8rem;">
+          <button class="save-btn" onclick="saveProfile()">Saqlash</button>
+          <button class="save-btn" style="background:none;border:1px solid var(--border);color:rgba(245,237,214,0.5);" onclick="showChangePassModal()">Parolni o'zgartirish</button>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="form-section-title">📄 Hujjatlar</div>
+        <div class="doc-grid">
+          <div class="doc-card uploaded">
+            <div class="doc-check">✅</div>
+            <div class="doc-icon">🪪</div>
+            <div class="doc-name">Pasport</div>
+            <div class="doc-status ok">Tasdiqlangan</div>
+            <div class="doc-expiry">Amal qilish muddati: 2028-03-15</div>
+          </div>
+          <div class="doc-card uploaded">
+            <div class="doc-check">✅</div>
+            <div class="doc-icon">🚗</div>
+            <div class="doc-name">Haydovchilik guvohnomasi</div>
+            <div class="doc-status ok">Tasdiqlangan</div>
+            <div class="doc-expiry">Muddati: 2026-08-20</div>
+          </div>
+          <div class="doc-card" onclick="uploadDoc(this,'texnik_ko_rik')">
+            <div class="doc-icon">🔧</div>
+            <div class="doc-name">Texnik ko'rik</div>
+            <div class="doc-status expired">⚠ Muddati o'tgan!</div>
+            <div class="doc-expiry">O'tgan: 2024-12-01</div>
+            <button class="doc-upload-btn">Yangilash</button>
+          </div>
+          <div class="doc-card" onclick="uploadDoc(this,'sugurta')">
+            <div class="doc-icon">📋</div>
+            <div class="doc-name">Avtomobil sug'urtasi</div>
+            <div class="doc-status pending">Yuklanmagan</div>
+            <div class="doc-expiry">—</div>
+            <button class="doc-upload-btn">Yuklash</button>
+          </div>
+          <div class="doc-card uploaded">
+            <div class="doc-check">✅</div>
+            <div class="doc-icon">📸</div>
+            <div class="doc-name">Profil rasmi</div>
+            <div class="doc-status ok">Tasdiqlangan</div>
+            <div class="doc-expiry">—</div>
+          </div>
+          <div class="doc-card" onclick="uploadDoc(this,'tibbiy')">
+            <div class="doc-icon">🏥</div>
+            <div class="doc-name">Tibbiy ma'lumotnoma</div>
+            <div class="doc-status pending">Ko'rib chiqilmoqda</div>
+            <div class="doc-expiry">Yuborilgan: 2025-05-10</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="form-section-title">🏦 Bank va to'lov</div>
+        <div class="form-grid">
+          <div class="field-group">
+            <div class="field-label">Karta raqami</div>
+            <input class="field-input" value="8600 **** **** 3421" readonly style="font-family:'Cinzel',serif;letter-spacing:0.1em;">
+          </div>
+          <div class="field-group">
+            <div class="field-label">To'lov tizimi</div>
+            <select class="field-input">
+              <option>Click</option><option>Payme</option><option>Bank o'tkazmasi</option>
+            </select>
+          </div>
+        </div>
+        <button class="save-btn" style="margin-top:1.2rem;" onclick="showToast('🏦','Bank ma\'lumotlari','Muvaffaqiyatli saqlandi')">Saqlash</button>
+      </div>
+    </div>
+
+    <div class="page" id="page-vehicle">
+      <div class="section-header">
+        <div class="section-title">Mening avtomobilim</div>
+        <div class="section-sub">Avtomobil ma'lumotlari va texnik holati</div>
+      </div>
+      <div class="grid-2 mb-2">
+        <div class="card" style="text-align:center;padding:2rem;">
+          <span class="vehicle-emoji">🚙</span>
+          <div class="vehicle-plate">01 B 123 AB</div>
+          <div class="vehicle-model">Chevrolet Cobalt 2021 — Kumush</div>
+          <div class="vehicle-info-grid">
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">Cobalt</div>
+              <div class="vehicle-info-label">Model</div>
+            </div>
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">2021</div>
+              <div class="vehicle-info-label">Yil</div>
+            </div>
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">Kumush</div>
+              <div class="vehicle-info-label">Rang</div>
+            </div>
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">4</div>
+              <div class="vehicle-info-label">O'rindiqlar</div>
+            </div>
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">AC ✓</div>
+              <div class="vehicle-info-label">Konditsioner</div>
+            </div>
+            <div class="vehicle-info-item">
+              <div class="vehicle-info-val">87,420</div>
+              <div class="vehicle-info-label">Km (yurgan)</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="card card-gold-top">
+            <div class="card-label">Texnik holat</div>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.5rem;">
+              <div class="flex-between">
+                <span style="font-size:0.82rem;color:rgba(245,237,214,0.6);">Moy almashtirish</span>
+                <span style="font-size:0.8rem;color:var(--green-light);font-weight:600;">✅ OK</span>
+              </div>
+              <div class="flex-between">
+                <span style="font-size:0.82rem;color:rgba(245,237,214,0.6);">Shina holati</span>
+                <span style="font-size:0.8rem;color:var(--gold);font-weight:600;">⚠ Yaqin</span>
+              </div>
+              <div class="flex-between">
+                <span style="font-size:0.82rem;color:rgba(245,237,214,0.6);">Aккumulyator</span>
+                <span style="font-size:0.8rem;color:var(--green-light);font-weight:600;">✅ OK</span>
+              </div>
+              <div class="flex-between">
+                <span style="font-size:0.82rem;color:rgba(245,237,214,0.6);">Tormozlar</span>
+                <span style="font-size:0.8rem;color:var(--green-light);font-weight:600;">✅ OK</span>
+              </div>
+              <div class="flex-between">
+                <span style="font-size:0.82rem;color:rgba(245,237,214,0.6);">Texnik ko'rik</span>
+                <span style="font-size:0.8rem;color:#E8835A;font-weight:600;">❌ Yangilash kerak</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-label">Avtomobil ma'lumotlarini o'zgartirish</div>
+            <div style="display:flex;flex-direction:column;gap:0.8rem;margin-top:0.5rem;">
+              <div class="field-group">
+                <div class="field-label">Davlat raqami</div>
+                <input class="field-input" value="01 B 123 AB">
+              </div>
+              <div class="field-group">
+                <div class="field-label">Avtomobil modeli</div>
+                <select class="field-input">
+                  <option>Chevrolet Cobalt</option>
+                  <option>Chevrolet Nexia</option>
+                  <option>Chevrolet Spark</option>
+                  <option>Chevrolet Lacetti</option>
+                  <option>Chevrolet Malibu</option>
+                  <option>Toyota Camry</option>
+                  <option>Hyundai Accent</option>
+                  <option>Daewoo Matiz</option>
+                </select>
+              </div>
+              <button class="save-btn" style="margin-top:0.3rem;" onclick="showToast('🚗','Avtomobil','Ma\'lumotlar muvaffaqiyatli yangilandi')">Saqlash</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="form-section-title">📋 Avtomobil hujjatlari</div>
+        <div class="doc-grid">
+          <div class="doc-card uploaded">
+            <div class="doc-check">✅</div>
+            <div class="doc-icon">🚙</div>
+            <div class="doc-name">Texnik pasport</div>
+            <div class="doc-status ok">Tasdiqlangan</div>
+            <div class="doc-expiry">Berilgan: 2021-06-10</div>
+          </div>
+          <div class="doc-card" onclick="uploadDoc(this,'insurance')">
+            <div class="doc-icon">🛡️</div>
+            <div class="doc-name">OSAGO (sug'urta)</div>
+            <div class="doc-status pending">Yuklanmagan</div>
+            <button class="doc-upload-btn">Yuklash</button>
+          </div>
+          <div class="doc-card" onclick="uploadDoc(this,'texnik')">
+            <div class="doc-icon">🔧</div>
+            <div class="doc-name">Texnik ko'rik</div>
+            <div class="doc-status expired">⚠ Muddati o'tgan</div>
+            <div class="doc-expiry">Yangilash kerak!</div>
+            <button class="doc-upload-btn">Yangilash</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-notifications">
+      <div class="section-header flex-between">
+        <div>
+          <div class="section-title">Bildirishnomalar</div>
+          <div class="section-sub">Barcha yangilik va ogohlantirishlar</div>
+        </div>
+        <button class="topbar-btn" onclick="markAllRead()">Barchasini o'qilgan deb belgilash</button>
+      </div>
+      <div class="notif-list" id="notif-list"></div>
+    </div>
+
+    <div class="page" id="page-support">
+      <div class="section-header">
+        <div class="section-title">Yordam markazi</div>
+        <div class="section-sub">Muammo bormi? Biz yordam beramiz</div>
+      </div>
+      <div class="support-grid mb-2">
+        <div class="support-card" onclick="showToast('📞','Qo\'ng\'iroq markazi','Operator sizga 2 daqiqada ulanadi')">
+          <div class="support-card-icon">📞</div>
+          <div>
+            <div class="support-card-title">Telefon orqali yordam</div>
+            <div class="support-card-desc">24/7 ishlaydi. +998 71 000 0000. Tez javob kafolatlangan.</div>
+          </div>
+        </div>
+        <div class="support-card" onclick="showToast('💬','Live chat','Operator javob bermoqda...')">
+          <div class="support-card-icon">💬</div>
+          <div>
+            <div class="support-card-title">Online chat</div>
+            <div class="support-card-desc">Hozir 3 ta operator mavjud. Odatda 5 daqiqada javob beriladi.</div>
+          </div>
+        </div>
+        <div class="support-card" onclick="showToast('📧','Email yuborildi','Javobi 24 soat ichida keladi')">
+          <div class="support-card-icon">📧</div>
+          <div>
+            <div class="support-card-title">Email orqali murojaat</div>
+            <div class="support-card-desc">support@kervan.uz — Murakkab muammolar uchun.</div>
+          </div>
+        </div>
+        <div class="support-card" onclick="showToast('🚨','Favqulodda','Operator yo\'naltirilmoqda')">
+          <div class="support-card-icon">🚨</div>
+          <div>
+            <div class="support-card-title">Favqulodda yordam</div>
+            <div class="support-card-desc">Xavfli vaziyatda — darhol SOS tugmasini bosing.</div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-2">
+        <div class="form-section-title">📝 Murojaat yuborish</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="field-group">
+            <div class="field-label">Muammo turi</div>
+            <select class="field-input">
+              <option>To'lov muammosi</option>
+              <option>Yomon baho</option>
+              <option>Texnik nosozlik</option>
+              <option>Hujjat masalasi</option>
+              <option>Boshqa</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <div class="field-label">Sayohat ID (ixtiyoriy)</div>
+            <input class="field-input" placeholder="KRV-2025-XXXXX">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Xabar</div>
+            <textarea class="field-input" rows="4" placeholder="Muammoni batafsil yozing..."></textarea>
+          </div>
+          <button class="save-btn" onclick="showToast('✅','Murojaat qabul qilindi','Raqam: TKT-00847. Javob 24 soat ichida')">Yuborish</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="form-section-title">❓ Ko'p beriladigan savollar</div>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RIDE REQUEST POPUP -->
+<div class="ride-request-overlay" id="ride-request-overlay">
+  <div class="ride-request-card">
+    <div class="request-progress"><div class="request-progress-fill" id="request-progress-fill" style="width:100%"></div></div>
+    <div class="request-header">
+      <div>
+        <div class="request-title">🔔 Yangi buyurtma!</div>
+        <div style="font-size:0.7rem;color:rgba(245,237,214,0.35);margin-top:0.2rem;">Sizdan 2.3 km uzoqlikda</div>
+      </div>
+      <div>
+        <div class="request-timer" id="request-timer">15</div>
+        <div class="request-timer-label">soniya</div>
+      </div>
+    </div>
+    <div class="request-passenger">
+      <div class="request-pax-avatar">👤</div>
+      <div>
+        <div class="request-pax-name">Dilnoza Yusupova</div>
+        <div class="request-pax-rating">⭐ <span>4.8</span></div>
+        <div class="request-pax-trips">47 ta sayohat</div>
+      </div>
+    </div>
+    <div class="request-route">
+      <div class="request-route-item">
+        <span class="request-route-icon" style="color:var(--rust);">📍</span>
+        <div>
+          <div class="request-route-label">Olish joyi</div>
+          <div class="request-route-place">Yunusobod, 19-mavze, 12-uy</div>
+        </div>
+      </div>
+      <div class="request-route-line" style="margin-left:9px;"></div>
+      <div class="request-route-item">
+        <span class="request-route-icon" style="color:var(--teal);">🏁</span>
+        <div>
+          <div class="request-route-label">Manzil</div>
+          <div class="request-route-place">Toshkent — Samarqand (shaharlararo)</div>
+        </div>
+      </div>
+    </div>
+    <div class="request-stats">
+      <div class="request-stat">
+        <div class="request-stat-val">340 km</div>
+        <div class="request-stat-label">Masofa</div>
+      </div>
+      <div class="request-stat">
+        <div class="request-stat-val">~3h 45m</div>
+        <div class="request-stat-label">Vaqt</div>
+      </div>
+      <div class="request-stat">
+        <div class="request-stat-val" style="color:var(--green-light);">153,000</div>
+        <div class="request-stat-label">So'm</div>
+      </div>
+    </div>
+    <div class="request-actions">
+      <button class="request-accept" onclick="acceptRide()">✓ Qabul qilish</button>
+      <button class="request-decline" onclick="declineRide()">✕ Rad etish</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modal-title">Modal</div>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

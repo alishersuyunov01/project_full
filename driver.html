@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kervan — Driver Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS VARIABLES & RESET
+   ============================================================ */
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark: #8B6914;
+  --sand: #F5EDD6;
+  --sand-dark: #E8D9B0;
+  --ink: #1A1209;
+  --ink-mid: #2D2010;
+  --brown: #4A2C0A;
+  --cream: #FDF8EE;
+  --rust: #B5451B;
+  --teal: #1A6B6B;
+  --green: #2A7A3B;
+  --green-light: #3DAB54;
+  --red: #C0392B;
+  --shadow: rgba(26,18,9,0.3);
+  --panel: rgba(255,255,255,0.025);
+  --border: rgba(201,168,76,0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--ink);
+  color: var(--sand);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+body::after {
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.5;
+}
+
+/* ============================================================
+   LOGIN / AUTH SCREEN
+   ============================================================ */
+#auth-screen {
+  position: fixed; inset: 0; z-index: 5000;
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, #2D1A08 0%, #1A1209 60%, #0F0A05 100%);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+#auth-screen.exit { opacity: 0; transform: scale(1.03); pointer-events: none; }
+#auth-screen.gone { display: none; }
+
+.auth-stars { position: absolute; inset: 0; overflow: hidden; pointer-events:none; }
+.star {
+  position:absolute; width:2px; height:2px;
+  background:rgba(201,168,76,0.6); border-radius:50%;
+  animation:twinkle var(--dur) ease-in-out infinite var(--delay);
+}
+@keyframes twinkle { 0%,100%{opacity:0.2;transform:scale(1);}50%{opacity:1;transform:scale(1.5);} }
+
+.auth-ring {
+  position:absolute; width:500px; height:500px;
+  border:1px solid rgba(201,168,76,0.1); border-radius:50%;
+  animation:rotateRing 25s linear infinite;
+}
+.auth-ring:nth-child(2){ width:750px;height:750px;border-color:rgba(201,168,76,0.05);animation-direction:reverse;animation-duration:40s; }
+@keyframes rotateRing{ to{transform:rotate(360deg);} }
+
+.auth-box {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 460px;
+  padding: 0 1.5rem;
+  display: flex; flex-direction: column; align-items: center;
+  animation: authRise 1s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+}
+@keyframes authRise{ from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+
+.auth-logo {
+  display: flex; align-items: center; gap: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.auth-logo-camel { width: 54px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); }
+.auth-logo-name {
+  font-family: 'Cinzel', serif; font-size: 2.8rem; font-weight: 900;
+  color: var(--gold); letter-spacing: 0.12em;
+  text-shadow: 0 0 40px rgba(201,168,76,0.25);
+}
+.auth-role-badge {
+  font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+  color: rgba(245,237,214,0.4); margin-bottom: 2.2rem;
+}
+
+.auth-card {
+  width: 100%;
+  background: rgba(255,255,255,0.028);
+  border: 1px solid rgba(201,168,76,0.22);
+  padding: 2.5rem;
+  position: relative; overflow: hidden;
+}
+.auth-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.auth-tabs {
+  display: flex; border-bottom: 1px solid var(--border); margin-bottom: 2rem;
+}
+.auth-tab {
+  flex: 1; padding: 0.75rem; background: none; border: none; cursor: pointer;
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245,237,214,0.35);
+  transition: all 0.3s; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+.auth-form-panel { display: none; }
+.auth-form-panel.active { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.field-group { display: flex; flex-direction: column; gap: 0.45rem; }
+.field-label {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(245,237,214,0.45); font-weight: 600;
+}
+.field-input {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2);
+  color: var(--sand); font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  padding: 0.75rem 1rem; outline: none; transition: border-color 0.25s;
+  width: 100%;
+}
+.field-input:focus { border-color: var(--gold); }
+.field-input::placeholder { color: rgba(245,237,214,0.25); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+.auth-btn {
+  background: var(--gold); color: var(--ink); border: none; padding: 0.9rem;
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  margin-top: 0.5rem;
+}
+.auth-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.auth-divider {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.7rem; color: rgba(245,237,214,0.25); letter-spacing: 0.1em;
+}
+.auth-divider::before, .auth-divider::after {
+  content:''; flex:1; height:1px; background: rgba(201,168,76,0.15);
+}
+
+.auth-forgot {
+  text-align: right; font-size: 0.72rem; color: rgba(201,168,76,0.6);
+  cursor: pointer; transition: color 0.2s;
+}
+.auth-forgot:hover { color: var(--gold); }
+
+.auth-phone-group { display: flex; gap: 0.5rem; }
+.auth-phone-prefix {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2);
+  color: var(--sand); font-size: 0.9rem; padding: 0.75rem 0.8rem;
+  font-family: 'Outfit', sans-serif; outline: none; width: 80px; text-align: center;
+  border-right: none;
+}
+.auth-phone-prefix:focus { border-color: var(--gold); }
+.auth-phone-group .field-input { border-left: 1px solid rgba(201,168,76,0.2); }
+
+.auth-terms {
+  font-size: 0.68rem; color: rgba(245,237,214,0.3); line-height: 1.6;
+  text-align: center; margin-top: 0.3rem;
+}
+.auth-terms a { color: rgba(201,168,76,0.7); cursor: pointer; }
+
+.auth-error {
+  background: rgba(181,69,27,0.15); border: 1px solid rgba(181,69,27,0.4);
+  color: #E8835A; font-size: 0.78rem; padding: 0.65rem 0.9rem;
+  display: none; letter-spacing: 0.04em;
+}
+.auth-error.visible { display: block; }
+
+.auth-success {
+  background: rgba(42,122,59,0.15); border: 1px solid rgba(42,122,59,0.4);
+  color: #7DD88A; font-size: 0.78rem; padding: 0.65rem 0.9rem;
+  display: none; letter-spacing: 0.04em;
+}
+.auth-success.visible { display: block; }
+
+/* OTP panel */
+.otp-inputs { display: flex; gap: 0.7rem; justify-content: center; }
+.otp-input {
+  width: 52px; height: 60px; text-align: center; font-size: 1.5rem; font-weight: 700;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gold); font-family: 'Cinzel', serif; outline: none; transition: border-color 0.2s;
+}
+.otp-input:focus { border-color: var(--gold); }
+.otp-resend { font-size: 0.72rem; color: rgba(245,237,214,0.35); text-align: center; }
+.otp-resend span { color: var(--gold); cursor: pointer; }
+
+/* ============================================================
+   MAIN LAYOUT
+   ============================================================ */
+#main-app { display: none; min-height: 100vh; }
+#main-app.active { display: flex; }
+
+.sidebar {
+  width: 260px; min-height: 100vh; background: #0F0A05;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top:0; left:0; bottom:0;
+  z-index: 100; transition: transform 0.3s;
+}
+
+.sidebar-logo {
+  display: flex; align-items: center; gap: 0.7rem;
+  padding: 1.5rem 1.8rem;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+}
+.sidebar-logo-camel { width: 32px; filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
+.sidebar-logo-name { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 900; color: var(--gold); letter-spacing: 0.1em; }
+.sidebar-logo-sub { font-size: 0.55rem; letter-spacing: 0.25em; color: rgba(245,237,214,0.3); text-transform: uppercase; }
+
+.sidebar-profile {
+  padding: 1.3rem 1.8rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.sidebar-avatar {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink);
+  flex-shrink: 0; position: relative; cursor: pointer;
+}
+.online-badge {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: var(--green-light); border: 2px solid #0F0A05;
+  transition: background 0.3s;
+}
+.online-badge.offline { background: #888; }
+.sidebar-profile-info { flex: 1; min-width: 0; }
+.sidebar-profile-name { font-size: 0.9rem; font-weight: 600; color: var(--cream); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sidebar-profile-id { font-size: 0.67rem; color: rgba(245,237,214,0.35); letter-spacing: 0.08em; margin-top: 0.1rem; }
+.sidebar-profile-status {
+  font-size: 0.62rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--green-light); margin-top: 0.2rem; display: flex; align-items: center; gap: 0.3rem;
+  cursor: pointer; transition: color 0.2s;
+}
+.sidebar-profile-status::before { content:''; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.sidebar-profile-status.offline { color: rgba(245,237,214,0.35); }
+
+.sidebar-nav { flex: 1; padding: 1rem 0; overflow-y: auto; }
+.nav-section-label {
+  font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(245,237,214,0.25); padding: 0.8rem 1.8rem 0.4rem;
+  font-weight: 600;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.7rem 1.8rem; cursor: pointer; transition: all 0.2s;
+  border-left: 2px solid transparent; position: relative;
+  color: rgba(245,237,214,0.48); font-size: 0.85rem; font-weight: 500;
+  text-decoration: none;
+}
+.nav-item:hover { color: var(--cream); background: rgba(201,168,76,0.06); }
+.nav-item.active { color: var(--gold); background: rgba(201,168,76,0.1); border-left-color: var(--gold); }
+.nav-item-icon { font-size: 1.05rem; width: 22px; text-align: center; flex-shrink: 0; }
+.nav-badge {
+  margin-left: auto; background: var(--rust); color: var(--cream);
+  font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 999px;
+  min-width: 18px; text-align: center;
+}
+.nav-badge.gold { background: var(--gold); color: var(--ink); }
+
+.sidebar-bottom { padding: 1.3rem 1.8rem; border-top: 1px solid var(--border); }
+.sidebar-toggle-online {
+  width: 100%; padding: 0.7rem; background: rgba(42,122,59,0.15);
+  border: 1px solid rgba(42,122,59,0.4); color: var(--green-light);
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+}
+.sidebar-toggle-online:hover { background: rgba(42,122,59,0.25); }
+.sidebar-toggle-online.offline { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(245,237,214,0.4); }
+.sidebar-toggle-online::before { content:'●'; font-size:0.65rem; }
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+  margin-left: 260px; flex: 1; min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+
+.topbar {
+  background: rgba(15,10,5,0.9); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 2.5rem; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-left { display: flex; align-items: center; gap: 1.2rem; }
+.page-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); letter-spacing: 0.06em; }
+.page-breadcrumb { font-size: 0.72rem; color: rgba(245,237,214,0.3); letter-spacing: 0.08em; }
+.topbar-right { display: flex; align-items: center; gap: 1rem; }
+
+.topbar-btn {
+  background: none; border: 1px solid var(--border); color: rgba(245,237,214,0.55);
+  padding: 0.5rem 0.9rem; font-family: 'Outfit', sans-serif; font-size: 0.75rem;
+  font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.25s; display: flex; align-items: center; gap: 0.4rem;
+}
+.topbar-btn:hover { border-color: var(--gold); color: var(--gold); }
+.topbar-btn.primary { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.topbar-btn.primary:hover { background: var(--gold-light); }
+
+.notif-dot { position: relative; display: flex; align-items: center; }
+.notif-dot::after {
+  content:''; position:absolute; top:-2px; right:-2px;
+  width:8px; height:8px; background: var(--rust); border-radius:50%;
+  border: 2px solid #0F0A05;
+}
+
+.page { display: none; padding: 2rem 2.5rem; animation: pageFade 0.3s ease; }
+.page.active { display: block; }
+@keyframes pageFade { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+
+.card {
+  background: var(--panel); border: 1px solid var(--border);
+  padding: 1.6rem; position: relative; overflow: hidden;
+}
+.card-label { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(245,237,214,0.35); margin-bottom: 0.5rem; font-weight: 600; }
+.card-value { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--cream); line-height: 1; }
+.card-value.gold { color: var(--gold); }
+
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.3rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; }
+
+.toast {
+  position:fixed; bottom:2rem; right:2rem; z-index:9000;
+  background:var(--ink-mid); border:1px solid var(--gold);
+  padding:0.9rem 1.4rem; max-width:320px;
+  display:flex; align-items:flex-start; gap:0.8rem;
+  animation:toastIn 0.4s cubic-bezier(0.22,1,0.36,1);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+@keyframes toastIn { from{opacity:0;transform:translateX(30px);} to{opacity:1;transform:translateX(0);} }
+.toast.exit { animation:toastOut 0.3s ease forwards; }
+@keyframes toastOut { to{opacity:0;transform:translateX(30px);} }
+.toast-icon { font-size:1.1rem; flex-shrink:0; margin-top:0.1rem; }
+.toast-text { flex:1; }
+.toast-title { font-size:0.82rem; font-weight:700; color:var(--cream); margin-bottom:0.2rem; }
+.toast-msg { font-size:0.75rem; color:rgba(245,237,214,0.5); line-height:1.5; }
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-260px); }
+  .main-content { margin-left: 0; }
+  .grid-4 { grid-template-columns: repeat(2,1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     AUTH SCREEN
+     ============================================================ -->
+<div id="auth-screen">
+  <div class="auth-stars" id="auth-stars"></div>
+  <div class="auth-ring"></div>
+  <div class="auth-ring"></div>
+
+  <div class="auth-box">
+    <div class="auth-logo">
+      <svg class="auth-logo-camel" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="140" rx="65" ry="30" fill="#C9A84C" opacity="0.15"/>
+        <rect x="60" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="115" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="72" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <rect x="108" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <ellipse cx="100" cy="120" rx="52" ry="32" fill="#C9A84C"/>
+        <ellipse cx="145" cy="90" rx="22" ry="28" fill="#C9A84C"/>
+        <ellipse cx="100" cy="88" rx="28" ry="16" fill="#C9A84C"/>
+        <ellipse cx="158" cy="70" rx="12" ry="20" fill="#C9A84C"/>
+        <circle cx="163" cy="58" r="8" fill="#C9A84C"/>
+        <ellipse cx="167" cy="53" rx="4" ry="3" fill="#C9A84C"/>
+        <circle cx="159" cy="52" r="2" fill="#1A1209"/>
+        <path d="M 162 56 Q 170 50 174 54" stroke="#8B6914" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="72" cy="88" rx="18" ry="10" fill="#8B6914" opacity="0.4"/>
+        <ellipse cx="128" cy="88" rx="18" ry="10" fill="#8B6914" opacity="0.4"/>
+        <path d="M 48 120 Q 35 110 38 125" stroke="#8B6914" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 38 125 Q 30 130 35 135" stroke="#8B6914" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="auth-logo-name">KERVAN</span>
+    </div>
+    <div class="auth-role-badge">🚗 &nbsp; Driver Portal &nbsp; — &nbsp; Haydovchi Tizimi</div>
+
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Kirish</button>
+        <button class="auth-tab" onclick="switchAuthTab('register')">Ro'yxatdan o'tish</button>
+      </div>
+
+      <div class="auth-form-panel active" id="panel-login">
+        <div class="auth-error" id="login-error">Telefon raqam yoki parol noto'g'ri.</div>
+        <div class="field-group">
+          <div class="field-label">Telefon raqam</div>
+          <div class="auth-phone-group">
+            <input class="auth-phone-prefix" value="+998" readonly>
+            <input class="field-input" id="login-phone" type="tel" placeholder="90 123 45 67" maxlength="12">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parol</div>
+          <input class="field-input" id="login-pass" type="password" placeholder="••••••••">
+        </div>
+        <div class="auth-forgot" onclick="showOtpPanel()">Parolni unutdingizmi? SMS orqali tiklash</div>
+        <button class="auth-btn" onclick="doLogin()">Kirish →</button>
+        <div class="auth-divider">YOKI</div>
+        <div class="auth-terms">Demo uchun istalgan ma'lumot kiriting va <span style="color:var(--gold)">Kirish</span> tugmasini bosing</div>
+      </div>
+
+      <div class="auth-form-panel" id="panel-otp">
+        <div class="auth-success" id="otp-sent" style="display:block;">SMS kod yuborildi: +998 ** *** ** **</div>
+        <div class="field-group">
+          <div class="field-label" style="text-align:center;">SMS kodini kiriting</div>
+          <div class="otp-inputs">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,1)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,2)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,3)">
+            <input class="otp-input" maxlength="1" oninput="otpMove(this,4)">
+          </div>
+        </div>
+        <div class="otp-resend">Kodni olmadingizmi? <span onclick="showToast('📱','SMS qayta yuborildi','30 soniyada qayta so\'rang')">Qayta yuborish</span></div>
+        <button class="auth-btn" onclick="doLogin()">Tasdiqlash →</button>
+        <button class="auth-btn" style="background:none;border:1px solid var(--border);color:rgba(245,237,214,0.5);margin-top:0;" onclick="switchAuthTab('login')">← Orqaga</button>
+      </div>
+
+      <div class="auth-form-panel" id="panel-register">
+        <div class="auth-error" id="reg-error"></div>
+        <div class="field-row">
+          <div class="field-group">
+            <div class="field-label">Ism</div>
+            <input class="field-input" id="reg-fname" placeholder="Jasur">
+          </div>
+          <div class="field-group">
+            <div class="field-label">Familya</div>
+            <input class="field-input" id="reg-lname" placeholder="Toshmatov">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Telefon raqam</div>
+          <div class="auth-phone-group">
+            <input class="auth-phone-prefix" value="+998" readonly>
+            <input class="field-input" id="reg-phone" type="tel" placeholder="90 123 45 67">
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parol</div>
+          <input class="field-input" id="reg-pass" type="password" placeholder="Kamida 8 belgi">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Parolni tasdiqlang</div>
+          <input class="field-input" id="reg-pass2" type="password" placeholder="••••••••">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Shahar</div>
+          <select class="field-input" id="reg-city">
+            <option value="">Shaharni tanlang...</option>
+            <option>Toshkent</option><option>Samarqand</option><option>Buxoro</option>
+            <option>Namangan</option><option>Andijon</option><option>Farg'ona</option>
+            <option>Nukus</option><option>Urganch</option><option>Termiz</option>
+          </select>
+        </div>
+        <button class="auth-btn" onclick="doRegister()">Ro'yxatdan o'tish →</button>
+        <div class="auth-terms">Ro'yxatdan o'tish orqali siz Kervan <a>Foydalanish shartlari</a> va <a>Maxfiylik siyosatimiz</a>ga rozilik bildirasiz.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN APPLICATION
+     ============================================================ -->
+<div id="main-app">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="#">
+      <svg class="sidebar-logo-camel" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="140" rx="65" ry="30" fill="#C9A84C" opacity="0.15"/>
+        <rect x="60" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="115" y="150" width="18" height="35" rx="5" fill="#C9A84C"/>
+        <rect x="72" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <rect x="108" y="140" width="12" height="28" rx="4" fill="#C9A84C"/>
+        <ellipse cx="100" cy="120" rx="52" ry="32" fill="#C9A84C"/>
+        <ellipse cx="145" cy="90" rx="22" ry="28" fill="#C9A84C"/>
+        <ellipse cx="100" cy="88" rx="28" ry="16" fill="#C9A84C"/>
+        <ellipse cx="158" cy="70" rx="12" ry="20" fill="#C9A84C"/>
+        <circle cx="163" cy="58" r="8" fill="#C9A84C"/>
+        <circle cx="159" cy="52" r="2" fill="#1A1209"/>
+      </svg>
+      <div>
+        <div class="sidebar-logo-name">KERVAN</div>
+        <div class="sidebar-logo-sub">Driver Portal</div>
+      </div>
+    </a>
+
+    <div class="sidebar-profile">
+      <div class="sidebar-avatar" onclick="navigate('dashboard')">
+        <span id="avatar-initials">JT</span>
+        <div class="online-badge" id="online-badge"></div>
+      </div>
+      <div class="sidebar-profile-info">
+        <div class="sidebar-profile-name">Jasur Toshmatov</div>
+        <div class="sidebar-profile-id">ID: KRV-04821</div>
+        <div class="sidebar-profile-status" id="status-label" onclick="toggleOnline()">Onlayn</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Asosiy</div>
+      <a class="nav-item active" id="nav-dashboard" onclick="navigate('dashboard')">
+        <span class="nav-item-icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" id="nav-trips" onclick="navigate('trips')">
+        <span class="nav-item-icon">🗺️</span> Sayohatlar
+      </a>
+      <a class="nav-item" id="nav-earnings" onclick="navigate('earnings')">
+        <span class="nav-item-icon">💰</span> Daromad
+      </a>
+      <div class="nav-section-label">Mening Hisobim</div>
+      <a class="nav-item" id="nav-profile" onclick="navigate('profile')">
+        <span class="nav-item-icon">👤</span> Profil
+      </a>
+      <a class="nav-item" id="nav-vehicle" onclick="navigate('vehicle')">
+        <span class="nav-item-icon">🚗</span> Avtomobil
+      </a>
+      <a class="nav-item" id="nav-notifications" onclick="navigate('notifications')">
+        <span class="nav-item-icon">🔔</span> Bildirishnomalar
+      </a>
+      <div class="nav-section-label">Yordam</div>
+      <a class="nav-item" id="nav-support" onclick="navigate('support')">
+        <span class="nav-item-icon">❓</span> Yordam markazi
+      </a>
+      <a class="nav-item" onclick="doLogout()">
+        <span class="nav-item-icon">🚪</span> Chiqish
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="sidebar-toggle-online" id="online-toggle" onclick="toggleOnline()">
+        ONLAYN &nbsp; ●
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="page-title" id="topbar-title">Dashboard</span>
+        <span class="page-breadcrumb" id="topbar-breadcrumb">Xush kelibsiz!</span>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn primary" onclick="toggleOnline()" id="topbar-status-btn">● Onlayn</button>
+      </div>
+    </div>
+
+    <div class="page active" id="page-dashboard">
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-label">Bugungi daromad</div>
+          <div class="card-value gold">187,500</div>
+          <div style="font-size:0.72rem;color:rgba(245,237,214,0.35);margin-top:0.5rem;">↑ +12% kecha</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Bugungi sayohatlar</div>
+          <div class="card-value">8</div>
+          <div style="font-size:0.72rem;color:rgba(245,237,214,0.35);margin-top:0.5rem;">Maqsad: 12 ta</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Reyting</div>
+          <div class="card-value gold">4.9</div>
+          <div style="font-size:0.72rem;color:rgba(245,237,214,0.35);margin-top:0.5rem;">412 baho</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Qabul darajasi</div>
+          <div class="card-value" style="color:#3DAB54">93%</div>
+          <div style="font-size:0.72rem;color:rgba(245,237,214,0.35);margin-top:0.5rem;">↑ Zo'r!</div>
+        </div>
+      </div>
+
+      <!-- RECENT TRIPS SECTION -->
+      <div class="card" style="margin-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <div style="font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--cream); letter-spacing: 0.06em;">So'nggi sayohatlar</div>
+          <a href="#" style="font-size: 0.75rem; color: rgba(201,168,76,0.6); text-decoration: none; letter-spacing: 0.1em;">Barchasi →</a>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.8rem; background: rgba(255,255,255,0.02); border-left: 3px solid var(--green-light); border-radius: 4px;">
+            <div style="flex: 1;">
+              <div style="font-size: 0.9rem; font-weight: 600; color: var(--cream);">Tashkent → Samarkand</div>
+              <div style="font-size: 0.75rem; color: rgba(245,237,214,0.5); margin-top: 0.2rem;">Bugun, 11:32 · 340 km</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.9rem; font-weight: 700; color: var(--gold);">153,000 SO'M</div>
+              <div style="font-size: 0.75rem; color: var(--gold); margin-top: 0.2rem;">⭐ 5</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.8rem; background: rgba(255,255,255,0.02); border-left: 3px solid var(--green-light); border-radius: 4px;">
+            <div style="flex: 1;">
+              <div style="font-size: 0.9rem; font-weight: 600; color: var(--cream);">Tashkent → Jizzakh</div>
+              <div style="font-size: 0.75rem; color: rgba(245,237,214,0.5); margin-top: 0.2rem;">Bugun, 08:55 · 200 km</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.9rem; font-weight: 700; color: var(--gold);">90,000 SO'M</div>
+              <div style="font-size: 0.75rem; color: var(--gold); margin-top: 0.2rem;">⭐ 5</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.8rem; background: rgba(255,255,255,0.02); border-left: 3px solid var(--gold); border-radius: 4px;">
+            <div style="flex: 1;">
+              <div style="font-size: 0.9rem; font-weight: 600; color: var(--cream);">Samarkand → Tashkent</div>
+              <div style="font-size: 0.75rem; color: rgba(245,237,214,0.5); margin-top: 0.2rem;">Kecha, 18:20 · 340 km</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.9rem; font-weight: 700; color: var(--gold);">150,000 SO'M</div>
+              <div style="font-size: 0.75rem; color: var(--gold); margin-top: 0.2rem;">⭐ 4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EARNINGS SECTION -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem; margin-top: 2rem;">
+        <div class="card">
+          <div style="font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--cream); letter-spacing: 0.06em; margin-bottom: 1rem;">Bugungi maqsad</div>
+          <div style="display: flex; align-items: flex-end; gap: 0.5rem;">
+            <div style="font-family: 'Cinzel', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold);">187,500</div>
+            <div style="font-size: 0.75rem; color: rgba(245,237,214,0.5); margin-bottom: 0.3rem;">SO'M / 300,000</div>
+          </div>
+          <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; margin-top: 0.8rem; overflow: hidden;">
+            <div style="width: 62%; height: 100%; background: var(--gold); border-radius: 3px;"></div>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(181,69,27,0.08); border-color: rgba(181,69,27,0.3);">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem;">
+            <span style="font-size: 1rem;">🎁</span>
+            <span style="font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,237,214,0.45); font-weight: 600;">Bonus zonasi faol</span>
+          </div>
+          <div style="font-size: 0.85rem; color: rgba(245,237,214,0.7); margin-bottom: 0.5rem;"><strong>Tashkent — Samarkand yo'li</strong></div>
+          <div style="font-size: 0.75rem; color: rgba(245,237,214,0.5); line-height: 1.6;">Hazir bu yo'lishda sayohat qilsangiz, tarifga +20% bonus qo'shiladiColorSpace</div>
+          <button style="margin-top: 0.8rem; background: rgba(181,69,27,0.2); border: 1px solid rgba(181,69,27,0.4); color: #E8835A; padding: 0.5rem 0.8rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; cursor: pointer; border-radius: 4px; font-family: 'Outfit', sans-serif;">Yo'lni tanlash →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="page-trips" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Sayohatlar</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Sayohatlar tarixi va statistika shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-earnings" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Daromad</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Daromad va to'lovlar statistikasi shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-profile" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Profil</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Profil ma'lumotlari shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-vehicle" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Avtomobil</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Avtomobil ma'lumotlari shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-notifications" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Bildirishnomalar</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Bildirishnomalar shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+
+    <div class="page" id="page-support" style="padding-left:2.5rem;padding-right:2.5rem;">
+      <h2 style="font-family:'Cinzel',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--cream);">Yordam markazi</h2>
+      <div class="card">
+        <p style="color:rgba(245,237,214,0.5);">Yordam va ko'mak shu yerda ko'rsatiladi.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+/* Auth stars */
+(function(){
+  const c=document.getElementById('auth-stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');s.className='star';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*3}s;--delay:${Math.random()*3}s;`;
+    if(Math.random()>0.75)s.style.width=s.style.height='3px';
+    c.appendChild(s);
+  }
+})();
+
+let isOnline=true;
+
+function switchAuthTab(tab){
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.auth-form-panel').forEach(p=>p.classList.remove('active'));
+  const idx={'login':0,'register':1,'otp':2}[tab]||0;
+  document.querySelectorAll('.auth-tab')[idx].classList.add('active');
+  document.getElementById('panel-'+tab)?.classList.add('active');
+}
+
+function showOtpPanel(){
+  switchAuthTab('otp');
+}
+
+function otpMove(el,idx){
+  if(el.value.length===1 && idx<4){
+    document.querySelectorAll('.otp-input')[idx].focus();
+  }
+}
+
+function doLogin(){
+  const phone=document.getElementById('login-phone').value;
+  const pass=document.getElementById('login-pass').value;
+  if(!phone||!pass){showToast('⚠️','Xatolik','Telefon va parolni kiriting');return;}
+  setTimeout(()=>launchApp('Jasur Toshmatov'),400);
+}
+
+function doRegister(){
+  const fn=document.getElementById('reg-fname').value;
+  const ln=document.getElementById('reg-lname').value;
+  if(!fn||!ln){showToast('⚠️','Xatolik','Ism va familyani kiriting');return;}
+  showOtpPanel();
+  window._regName=fn+' '+ln;
+}
+
+function launchApp(name){
+  document.getElementById('auth-screen').classList.add('exit');
+  setTimeout(()=>{
+    document.getElementById('auth-screen').classList.add('gone');
+    document.getElementById('main-app').classList.add('active');
+    const n=window._regName||name;
+    const initials=n.split(' ').map(w=>w[0]||'').join('').toUpperCase();
+    document.getElementById('avatar-initials').textContent=initials;
+    document.getElementById('topbar-breadcrumb').textContent='Xush kelibsiz, '+n.split(' ')[0]+'!';
+  },750);
+}
+
+const pages={
+  dashboard:{title:'Dashboard',breadcrumb:'Bugungi holat'},
+  trips:{title:'Sayohatlar',breadcrumb:'Tarix'},
+  earnings:{title:'Daromad',breadcrumb:'Moliyaviy hisobot'},
+  profile:{title:'Profil',breadcrumb:'Shaxsiy ma\'lumotlar'},
+  vehicle:{title:'Avtomobil',breadcrumb:'Texnik holat'},
+  notifications:{title:'Bildirishnomalar',breadcrumb:'Yangiliklar'},
+  support:{title:'Yordam',breadcrumb:'Murojaat'},
+};
+
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page)?.classList.add('active');
+  document.getElementById('nav-'+page)?.classList.add('active');
+  const info=pages[page]||{};
+  document.getElementById('topbar-title').textContent=info.title||page;
+  document.getElementById('topbar-breadcrumb').textContent=info.breadcrumb||'';
+}
+
+function toggleOnline(){
+  isOnline=!isOnline;
+  const badge=document.getElementById('online-badge');
+  const label=document.getElementById('status-label');
+  const btn=document.getElementById('online-toggle');
+  const topBtn=document.getElementById('topbar-status-btn');
+  if(isOnline){
+    badge.classList.remove('offline');
+    label.textContent='Onlayn';
+    btn.innerHTML='ONLAYN &nbsp; ●';
+    topBtn.textContent='● Onlayn';
+    showToast('🟢','Onlayn','Buyurtmalar qabul qilinmoqda');
+  }else{
+    badge.classList.add('offline');
+    label.textContent='Oflayn';
+    btn.innerHTML='OFLAYN &nbsp; ○';
+    topBtn.textContent='○ Oflayn';
+    showToast('🔴','Oflayn','Buyurtmalar to\'xtatildi');
+  }
+}
+
+function doLogout(){
+  const auth=document.getElementById('auth-screen');
+  const app=document.getElementById('main-app');
+  app.classList.remove('active');
+  auth.classList.remove('exit','gone');
+  location.href='index.html';
+}
+
+function showToast(icon,title,msg){
+  const c=document.getElementById('toast-container');
+  const t=document.createElement('div');
+  t.className='toast';
+  t.innerHTML=`<div class="toast-icon">${icon}</div><div class="toast-text"><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div>`;
+  c.appendChild(t);
+  setTimeout(()=>{
+    t.classList.add('exit');
+    setTimeout(()=>t.remove(),350);
+  },3500);
+}
+</script>
+</body>
+</html>
